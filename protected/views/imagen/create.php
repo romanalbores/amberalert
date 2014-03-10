@@ -1,0 +1,15 @@
+<?php
+$this->breadcrumbs=array(
+	'Imagens'=>array('index'),
+	'Create',
+);
+
+$this->menu=array(
+array('label'=>'List Imagen','url'=>array('index')),
+array('label'=>'Manage Imagen','url'=>array('admin')),
+);
+?>
+
+<h1>Create Imagen</h1>
+
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

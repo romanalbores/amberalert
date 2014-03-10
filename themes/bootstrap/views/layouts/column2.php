@@ -1,0 +1,30 @@
+<?php $this->beginContent('//layouts/main'); ?>
+ <div class="row">
+ <div class="span3">
+ <?php
+// $this->widget('bootstrap.widgets.TbBox', array(
+// 'title'=>'Operaciones',
+// 'headerIcon' => 'icon-th-list',
+// 'content'=> $this->widget('zii.widgets.CMenu', array(
+// 'items'=>$this->menu,
+// ),true),
+// ));
+ $this->widget('bootstrap.widgets.TbBox', array(
+ 'title'=>'Operaciones',
+ 'headerIcon' => 'icon-th-list',
+ 'content'=> $this->widget(
+    'bootstrap.widgets.TbMenu',
+    array(
+        'type' => 'list',
+        'items' => $this->menu,
+    )
+         ,true
+),
+ ));
+ ?>
+ </div>
+ <div class="span9">
+ <?php echo $content; ?>
+ </div> 
+ </div>
+<?php $this->endContent(); ?>
