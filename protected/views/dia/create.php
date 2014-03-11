@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
 	'Dias'=>array('index'),
-	'Create',
+	'Nuevo',
 );
 
 $this->menu=array(
-array('label'=>'List Dia','url'=>array('index')),
-array('label'=>'Manage Dia','url'=>array('admin')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 

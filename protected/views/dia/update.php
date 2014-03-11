@@ -2,14 +2,14 @@
 $this->breadcrumbs=array(
 	'Dias'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Actualizar',
 );
 
 	$this->menu=array(
-	array('label'=>'List Dia','url'=>array('index')),
-	array('label'=>'Create Dia','url'=>array('create')),
-	array('label'=>'View Dia','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage Dia','url'=>array('admin')),
+	array('label'=>'Listar','url'=>array('index')),
+	array('label'=>'Nuevo','url'=>array('create')),
+	array('label'=>'Ver','url'=>array('view','id'=>$model->id)),
+	array('label'=>'Administrar','url'=>array('admin')),
 	);
 	?>
 

@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
 	'Dias'=>array('index'),
-	'Manage',
+	'Administrar',
 );
 
 $this->menu=array(
-array('label'=>'List Dia','url'=>array('index')),
-array('label'=>'Create Dia','url'=>array('create')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Nuevo','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -31,7 +31,7 @@ return false;
 	or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
 </p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
+<?php echo CHtml::link('Búsqueda Avanzada','#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
 	<?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -47,15 +47,7 @@ return false;
 		'nombre',
 		'nombre_corto',
 		'codigo',
-		'descripcion',
-		'estatus',
-		/*
-		'registrado_por',
-		'fecha_registro',
-		'modificado_por',
-		'fecha_modificado',
-		'eliminado',
-		*/
+		'descripcion',	 
 array(
 'class'=>'bootstrap.widgets.TbButtonColumn',
 ),
