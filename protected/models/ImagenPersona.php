@@ -111,4 +111,20 @@ class ImagenPersona extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+          public function behaviors() {
+        return array(
+            'CTimestampBehavior' => array(
+                'class' => 'zii.behaviors.CTimestampBehavior',
+                'createAttribute' => 'registrado_por',
+                'updateAttribute' => 'modificado_por',
+                'setUpdateOnCreate' => true,
+            ),
+            'BlameableBehavior' => array(
+                'class' => 'application.components.behaviors.BlameableBehavior',
+                'createdByColumn' => 'fecha_registro',
+                'updatedByColumn' => 'fecha_modificado',
+            ),
+        );
+    }
 }
