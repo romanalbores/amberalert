@@ -9,7 +9,35 @@ array('label'=>'List Incidencia','url'=>array('index')),
 array('label'=>'Manage Incidencia','url'=>array('admin')),
 );
 ?>
-
+ping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+pingping
+ping
 <h1>Crear Incidencia</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model,'modelIncidenciaTiempo' => $modelIncidenciaTiempo)); ?>
