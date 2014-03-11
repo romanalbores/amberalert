@@ -4,8 +4,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'Create Dia','url'=>array('create')),
-array('label'=>'Manage Dia','url'=>array('admin')),
+array('label'=>'Nuevo','url'=>array('create')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
