@@ -1,85 +1,53 @@
-<?php
-$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
-    'id' => 'incidencia-form',
-    'enableAjaxValidation' => false,
-        ));
-?>
 
 <p class="help-block">Fields with <span class="required">*</span> are required.</p>
-
-<?php echo $form->errorSummary($model); ?>
-<?php echo $form->errorSummary($modelIncidenciaTiempo); ?>
-
-<?php echo $form->textFieldRow($modelIncidenciaTiempo, 'circunstancia_sospechosa', array('class' => 'span5')); ?>
-
+<div id="wizard-bar" class="progress progress-striped active">
+    <div class="bar"></div>
+</div>
+<!--<div style="float:right">
+        <input type="button" id="btn_next" class="btn button-next" name="next" value="Next" />
+        <input type="button" class="btn button-last" name="last" value="Last" />
+    </div>
+    <div style="float:left">
+        <input type="button" class="btn button-first" name="first" value="First" />
+        <input type="button" class="btn button-previous" name="previous" value="Previous" />
+    </div><br /><br />-->
+<!--<div class="wizard">
+    <li class="next">
+        xD
+    </li>
+</div>-->
 <?php
-$tipo_alerta = TipoAlerta::model()->obtenerListaTipoAlerta();
-$list_tipo_alerta = CHtml::listData($tipo_alerta, 'id', 'nombre');
-$list_tipo_alerta = CHtml::encodeArray($list_tipo_alerta);
-echo $form->dropDownListRow(
-        $model, 'id_tipo_alerta', $list_tipo_alerta, array('prompt' => 'Seleccionar Tipo de Alerta')
-);
-?>
+$formIncidencia = $this->renderPartial('_formIncidencia', array('model' => $model, 'modelIncidenciaTiempo' => $modelIncidenciaTiempo), true, false);
+$formIncidenciaTiempo = $this->renderPartial('_formIncidenciaTiempo', array('model' => $modelIncidenciaTiempo), true, false);
 
-<?php
-$caso_particular = CasoParticular::model()->obtenerListaCasoParticular();
-$list_caso_particular = CHtml::listData($caso_particular, 'id', 'nombre');
-$list_caso_particular = CHtml::encodeArray($list_caso_particular);
-echo $form->dropDownListRow(
-        $model, 'id_caso_particular', $list_caso_particular, array('prompt' => 'Seleccionar Caso particular')
-);
-?>
-
-<?php
-    echo $form->datepickerRow(
-        $model, 'fecha_incidencia', array(
-    'options' => array('language' => 'es','format' => 'dd/mm/yyyy'),
-    'prepend' => '<i class="icon-search"></i>',    
+$this->widget(
+        'bootstrap.widgets.TbWizard', array(
+    'type' => 'tabs', // 'tabs' or 'pills'
+    'placement' => 'left',
+//    'pagerContent' => '',
+    'options' => array(
+//        'nextSelector' => '#btn_next',
+//        'previousSelector' => '.button-previous',
+//        'firstSelector' => '.button-first',
+//        'lastSelector' => '.button-last',
+        'onTabShow' => 'js:function(tab, navigation, index) {
+            
+var $total = navigation.find("li").length;
+var $current = index+1;
+var $percent = ($current/$total) * 100;
+$("#wizard-bar > .bar").css({width:$percent+"%"});
+}',
+        'onTabClick' => 'js:function(tab, navigation, index) {alert("Tab Click Disabled");return false;}',
+    ),
+    'tabs' => array(
+        array(
+            'label' => 'Incidencia',
+            'content' => $formIncidencia,
+            'active' => true
+        ),
+        array('label' => 'Incidencia Tiempo', 'content' => $formIncidenciaTiempo),
+        array('label' => 'Messages', 'content' => 'Messages Content'),
+    ),
         )
 );
 ?>
-
-<?php echo $form->textAreaRow($model, 'suceso', array('rows' => 6, 'cols' => 50, 'class' => 'span8')); ?>
-
-<?php
-echo $form->checkBoxRow(
-        $model, 'heridas', array('disabled' => false)
-);
-?>
-
-<?php echo $form->textAreaRow($model, 'descripcion_heridas', array('rows' => 6, 'cols' => 50, 'class' => 'span8')); ?>
-
-<?php
-echo $form->checkBoxRow(
-        $model, 'armas', array('disabled' => false)
-);
-?>
-
-<?php echo $form->textAreaRow($model, 'descripcion_armas', array('rows' => 6, 'cols' => 50, 'class' => 'span8')); ?>
-
-<?php echo $form->textFieldRow($model, 'lugar_avistamiento_final', array('class' => 'span5', 'maxlength' => 1000)); ?>
-
-<?php echo $form->textFieldRow($model, 'persona_acompaniante_final', array('class' => 'span5', 'maxlength' => 1000)); ?>
-
-<?php echo $form->textFieldRow($model, 'relacion_acompaniante', array('class' => 'span5', 'maxlength' => 1000)); ?>
-
-<?php echo $form->textFieldRow($model, 'relacion_persona_llamada', array('class' => 'span5', 'maxlength' => 1000)); ?>
-
-<?php echo $form->textFieldRow($model, 'estatus_suceso', array('class' => 'span5', 'maxlength' => 15)); ?>
-
-<?php echo $form->textAreaRow($model, 'direccion_viaje', array('rows' => 6, 'cols' => 50, 'class' => 'span8')); ?>
-
-<?php echo $form->textAreaRow($model, 'descripcion_objeto', array('rows' => 6, 'cols' => 50, 'class' => 'span8')); ?>
-
-
-<div class="form-actions">
-    <?php
-    $this->widget('bootstrap.widgets.TbButton', array(
-        'buttonType' => 'submit',
-        'type' => 'primary',
-        'label' => $model->isNewRecord ? 'Create' : 'Guardar',
-    ));
-    ?>
-</div>
-
-<?php $this->endWidget(); ?>
