@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
 	'Caso Particulars'=>array('index'),
-	'Create',
+	'Nuevo',
 );
 
 $this->menu=array(
-array('label'=>'List CasoParticular','url'=>array('index')),
-array('label'=>'Manage CasoParticular','url'=>array('admin')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 

@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Caso Particulars'=>array('index'),
+	'Caso Particular'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Actualizar',
 );
 
 	$this->menu=array(
-	array('label'=>'List CasoParticular','url'=>array('index')),
-	array('label'=>'Create CasoParticular','url'=>array('create')),
-	array('label'=>'View CasoParticular','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage CasoParticular','url'=>array('admin')),
+	array('label'=>'Listar','url'=>array('index')),
+	array('label'=>'Nuevo','url'=>array('create')),
+	array('label'=>'Ver','url'=>array('view','id'=>$model->id)),
+	array('label'=>'Administrar','url'=>array('admin')),
 	);
 	?>
 

@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
 	'Departamentos'=>array('index'),
-	'Create',
+	'Nuevo',
 );
 
 $this->menu=array(
-array('label'=>'List Departamento','url'=>array('index')),
-array('label'=>'Manage Departamento','url'=>array('admin')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 

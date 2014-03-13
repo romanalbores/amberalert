@@ -2,14 +2,14 @@
 $this->breadcrumbs=array(
 	'Departamentos'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Actualizar',
 );
 
 	$this->menu=array(
-	array('label'=>'List Departamento','url'=>array('index')),
-	array('label'=>'Create Departamento','url'=>array('create')),
-	array('label'=>'View Departamento','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage Departamento','url'=>array('admin')),
+	array('label'=>'Listar','url'=>array('index')),
+	array('label'=>'Nuevo','url'=>array('create')),
+	array('label'=>'Ver','url'=>array('view','id'=>$model->id)),
+	array('label'=>'Administrar','url'=>array('admin')),
 	);
 	?>
 
