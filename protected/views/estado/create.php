@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
 	'Estados'=>array('index'),
-	'Create',
+	'Nuevo',
 );
 
 $this->menu=array(
-array('label'=>'List Estado','url'=>array('index')),
-array('label'=>'Manage Estado','url'=>array('admin')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>Create Estado</h1>
+<h1>Registrar Estado</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

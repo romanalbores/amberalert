@@ -3,13 +3,13 @@
 /* @var $model Localidad */
 
 $this->breadcrumbs=array(
-	'Localidads'=>array('index'),
-	'Manage',
+	'Localidades'=>array('index'),
+	'Administrar',
 );
 
 $this->menu=array(
-	array('label'=>'List Localidad', 'url'=>array('index')),
-	array('label'=>'Create Localidad', 'url'=>array('create')),
+	array('label'=>'Listar', 'url'=>array('index')),
+	array('label'=>'Nuevo', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -51,15 +51,6 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'nombre_corto',
 		'codigo',
 		'poblacion',
-		/*
-		'descripcion',
-		'estatus',
-		'registrado_por',
-		'fecha_registro',
-		'modificado_por',
-		'fecha_modificado',
-		'eliminado',
-		*/
 		array(
 			'class'=>'CButtonColumn',
 		),

@@ -50,43 +50,6 @@
 		<?php echo $form->textArea($model,'descripcion',array('rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'descripcion'); ?>
 	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'estatus'); ?>
-		<?php echo $form->textField($model,'estatus',array('size'=>15,'maxlength'=>15)); ?>
-		<?php echo $form->error($model,'estatus'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'registrado_por'); ?>
-		<?php echo $form->textField($model,'registrado_por'); ?>
-		<?php echo $form->error($model,'registrado_por'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'fecha_registro'); ?>
-		<?php echo $form->textField($model,'fecha_registro'); ?>
-		<?php echo $form->error($model,'fecha_registro'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'modificado_por'); ?>
-		<?php echo $form->textField($model,'modificado_por'); ?>
-		<?php echo $form->error($model,'modificado_por'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'fecha_modificado'); ?>
-		<?php echo $form->textField($model,'fecha_modificado'); ?>
-		<?php echo $form->error($model,'fecha_modificado'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'eliminado'); ?>
-		<?php echo $form->textField($model,'eliminado'); ?>
-		<?php echo $form->error($model,'eliminado'); ?>
-	</div>
-
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Guardar'); ?>
 	</div>

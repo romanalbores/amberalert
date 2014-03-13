@@ -3,12 +3,12 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Localidads',
+	'Localidades',
 );
 
 $this->menu=array(
-	array('label'=>'Create Localidad', 'url'=>array('create')),
-	array('label'=>'Manage Localidad', 'url'=>array('admin')),
+	array('label'=>'Nuevo', 'url'=>array('create')),
+	array('label'=>'Administrar', 'url'=>array('admin')),
 );
 ?>
 

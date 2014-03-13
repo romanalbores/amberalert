@@ -1,19 +1,19 @@
 <?php
 $this->breadcrumbs=array(
-	'Direccions'=>array('index'),
+	'Dirección'=>array('index'),
 	$model->id,
 );
 
 $this->menu=array(
-array('label'=>'List Direccion','url'=>array('index')),
-array('label'=>'Create Direccion','url'=>array('create')),
-array('label'=>'Update Direccion','url'=>array('update','id'=>$model->id)),
-array('label'=>'Delete Direccion','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-array('label'=>'Manage Direccion','url'=>array('admin')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Nuevo','url'=>array('create')),
+array('label'=>'Actualizar','url'=>array('update','id'=>$model->id)),
+array('label'=>'Eliminar','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>View Direccion #<?php echo $model->id; ?></h1>
+<h1>Ver Dirección <?php echo $model->id; ?></h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 'data'=>$model,
@@ -24,11 +24,5 @@ array('label'=>'Manage Direccion','url'=>array('admin')),
 		'colonia',
 		'localidad',
 		'codigo_postal',
-		'estatus',
-		'registrado_por',
-		'fecha_registro',
-		'modificado_por',
-		'fecha_modificado',
-		'eliminado',
 ),
 )); ?>

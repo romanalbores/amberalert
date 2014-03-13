@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Direccions'=>array('index'),
+	'Dirección'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Actualizar',
 );
 
 	$this->menu=array(
-	array('label'=>'List Direccion','url'=>array('index')),
-	array('label'=>'Create Direccion','url'=>array('create')),
-	array('label'=>'View Direccion','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage Direccion','url'=>array('admin')),
+	array('label'=>'Listar','url'=>array('index')),
+	array('label'=>'Nuevo','url'=>array('create')),
+	array('label'=>'Ver','url'=>array('view','id'=>$model->id)),
+	array('label'=>'Administrar','url'=>array('admin')),
 	);
 	?>
 

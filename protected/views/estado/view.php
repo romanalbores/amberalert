@@ -5,11 +5,11 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'List Estado','url'=>array('index')),
-array('label'=>'Create Estado','url'=>array('create')),
-array('label'=>'Update Estado','url'=>array('update','id'=>$model->id)),
-array('label'=>'Delete Estado','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-array('label'=>'Manage Estado','url'=>array('admin')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Nuevo','url'=>array('create')),
+array('label'=>'Actualizar','url'=>array('update','id'=>$model->id)),
+array('label'=>'Eliminar','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
@@ -24,11 +24,5 @@ array('label'=>'Manage Estado','url'=>array('admin')),
 		'nombre_corto',
 		'codigo',
 		'descripcion',
-		'estatus',
-		'registrado_por',
-		'fecha_registro',
-		'modificado_por',
-		'fecha_modificado',
-		'eliminado',
 ),
 )); ?>

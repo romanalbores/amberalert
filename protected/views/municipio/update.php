@@ -2,17 +2,17 @@
 $this->breadcrumbs=array(
 	'Municipios'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Actualizar',
 );
 
 	$this->menu=array(
-	array('label'=>'List Municipio','url'=>array('index')),
-	array('label'=>'Create Municipio','url'=>array('create')),
-	array('label'=>'View Municipio','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage Municipio','url'=>array('admin')),
+	array('label'=>'Listar','url'=>array('index')),
+	array('label'=>'Nuevo','url'=>array('create')),
+	array('label'=>'Ver','url'=>array('view','id'=>$model->id)),
+	array('label'=>'Administrar','url'=>array('admin')),
 	);
 	?>
 
-	<h1>Update Municipio <?php echo $model->id; ?></h1>
+	<h1>Actualizar Municipio <?php echo $model->id; ?></h1>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

@@ -3,16 +3,16 @@
 /* @var $model Localidad */
 
 $this->breadcrumbs=array(
-	'Localidads'=>array('index'),
-	'Create',
+	'Localidades'=>array('index'),
+	'Nuevo',
 );
 
 $this->menu=array(
-	array('label'=>'List Localidad', 'url'=>array('index')),
-	array('label'=>'Manage Localidad', 'url'=>array('admin')),
+	array('label'=>'Listar', 'url'=>array('index')),
+	array('label'=>'Administrar', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Localidad</h1>
+<h1>Registrar Localidad</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

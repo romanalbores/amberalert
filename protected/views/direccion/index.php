@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Direccions',
+	'Dirección',
 );
 
 $this->menu=array(
-array('label'=>'Create Direccion','url'=>array('create')),
-array('label'=>'Manage Direccion','url'=>array('admin')),
+array('label'=>'Nuevo','url'=>array('create')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>Direccions</h1>
+<h1>Dirección</h1>
 
 <?php $this->widget('bootstrap.widgets.TbListView',array(
 'dataProvider'=>$dataProvider,

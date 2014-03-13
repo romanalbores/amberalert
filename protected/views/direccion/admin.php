@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Direccions'=>array('index'),
-	'Manage',
+	'Dirección'=>array('index'),
+	'Administrar',
 );
 
 $this->menu=array(
-array('label'=>'List Direccion','url'=>array('index')),
-array('label'=>'Create Direccion','url'=>array('create')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Nuevo','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -49,14 +49,6 @@ return false;
 		'colonia',
 		'localidad',
 		'codigo_postal',
-		/*
-		'estatus',
-		'registrado_por',
-		'fecha_registro',
-		'modificado_por',
-		'fecha_modificado',
-		'eliminado',
-		*/
 array(
 'class'=>'bootstrap.widgets.TbButtonColumn',
 ),

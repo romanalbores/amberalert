@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Imagens'=>array('index'),
+	'Imágenes'=>array('index'),
 	$model->id,
 );
 
 $this->menu=array(
-array('label'=>'List Imagen','url'=>array('index')),
-array('label'=>'Create Imagen','url'=>array('create')),
-array('label'=>'Update Imagen','url'=>array('update','id'=>$model->id)),
-array('label'=>'Delete Imagen','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-array('label'=>'Manage Imagen','url'=>array('admin')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Nuevo','url'=>array('create')),
+array('label'=>'Actualizar','url'=>array('update','id'=>$model->id)),
+array('label'=>'Eliminar','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
@@ -23,15 +23,7 @@ array('label'=>'Manage Imagen','url'=>array('admin')),
 		'nombre_corto',
 		'codigo',
 		'descripcion',
-		'archivo',
 		'ruta',
-		'extension',
-		'publico',
-		'estatus',
-		'registrado_por',
-		'fecha_registro',
-		'modificado_por',
-		'fecha_modificado',
-		'eliminado',
+		'publico',    
 ),
 )); ?>

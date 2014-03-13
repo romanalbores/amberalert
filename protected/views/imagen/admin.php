@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Imagens'=>array('index'),
-	'Manage',
+	'Imágenes'=>array('index'),
+	'Administrar',
 );
 
 $this->menu=array(
-array('label'=>'List Imagen','url'=>array('index')),
-array('label'=>'Create Imagen','url'=>array('create')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Nuevo','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -47,19 +47,8 @@ return false;
 		'nombre',
 		'nombre_corto',
 		'codigo',
-		'descripcion',
-		'archivo',
-		/*
-		'ruta',
-		'extension',
-		'publico',
-		'estatus',
-		'registrado_por',
-		'fecha_registro',
-		'modificado_por',
-		'fecha_modificado',
-		'eliminado',
-		*/
+		'descripcion',		
+		'ruta',	
 array(
 'class'=>'bootstrap.widgets.TbButtonColumn',
 ),
