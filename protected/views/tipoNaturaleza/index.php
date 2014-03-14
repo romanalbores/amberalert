@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Tipo Naturalezas',
+	'Naturaleza',
 );
 
 $this->menu=array(
-array('label'=>'Create TipoNaturaleza','url'=>array('create')),
-array('label'=>'Manage TipoNaturaleza','url'=>array('admin')),
+array('label'=>'Nuevo','url'=>array('create')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>Tipo Naturalezas</h1>
+<h1>Naturaleza</h1>
 
 <?php $this->widget('bootstrap.widgets.TbListView',array(
 'dataProvider'=>$dataProvider,

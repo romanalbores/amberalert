@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Regions'=>array('index'),
+	'Regiones'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-array('label'=>'List Region','url'=>array('index')),
-array('label'=>'Create Region','url'=>array('create')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Nuevo','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -47,15 +47,7 @@ return false;
 		'nombre',
 		'nombre_corto',
 		'codigo',
-		'descripcion',
-		'estatus',
-		/*
-		'registrado_por',
-		'fecha_registro',
-		'modificado_por',
-		'fecha_modificado',
-		'eliminado',
-		*/
+		'descripcion',				
 array(
 'class'=>'bootstrap.widgets.TbButtonColumn',
 ),

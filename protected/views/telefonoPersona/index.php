@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Telefono Personas',
+	'Teléfono Personas',
 );
 
 $this->menu=array(
-array('label'=>'Create TelefonoPersona','url'=>array('create')),
-array('label'=>'Manage TelefonoPersona','url'=>array('admin')),
+array('label'=>'Nuevo','url'=>array('create')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>Telefono Personas</h1>
+<h1>Teléfono Personas</h1>
 
 <?php $this->widget('bootstrap.widgets.TbListView',array(
 'dataProvider'=>$dataProvider,

@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
 	'Paises'=>array('index'),
-	'Create',
+	'Nuevo',
 );
 
 $this->menu=array(
-array('label'=>'List Pais','url'=>array('index')),
-array('label'=>'Manage Pais','url'=>array('admin')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 

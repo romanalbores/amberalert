@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
 	'Tipo Postes'=>array('index'),
-	'Create',
+	'Nuevo',
 );
 
 $this->menu=array(
-array('label'=>'List TipoPoste','url'=>array('index')),
-array('label'=>'Manage TipoPoste','url'=>array('admin')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>Create TipoPoste</h1>
+<h1>Nuevo Tipo Poste</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

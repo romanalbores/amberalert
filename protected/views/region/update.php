@@ -1,18 +1,18 @@
 <?php
 $this->breadcrumbs=array(
-	'Regions'=>array('index'),
+	'Regiones'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Actualizar',
 );
 
 	$this->menu=array(
-	array('label'=>'List Region','url'=>array('index')),
-	array('label'=>'Create Region','url'=>array('create')),
-	array('label'=>'View Region','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage Region','url'=>array('admin')),
+	array('label'=>'Listar','url'=>array('index')),
+	array('label'=>'Nuevo','url'=>array('create')),
+	array('label'=>'Ver','url'=>array('view','id'=>$model->id)),
+	array('label'=>'Administrar','url'=>array('admin')),
 	);
 	?>
 
-	<h1>Update Region <?php echo $model->id; ?></h1>
+	<h1>Actualizar Region <?php echo $model->id; ?></h1>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

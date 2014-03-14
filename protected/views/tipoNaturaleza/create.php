@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Tipo Naturalezas'=>array('index'),
-	'Create',
+	'Naturaleza'=>array('index'),
+	'Nuevo',
 );
 
 $this->menu=array(
-array('label'=>'List TipoNaturaleza','url'=>array('index')),
-array('label'=>'Manage TipoNaturaleza','url'=>array('admin')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>Create TipoNaturaleza</h1>
+<h1>Nueva Naturaleza</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

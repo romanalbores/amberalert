@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
 	'Tipo Postes'=>array('index'),
-	'Manage',
+	'Administrar',
 );
 
 $this->menu=array(
-array('label'=>'List TipoPoste','url'=>array('index')),
-array('label'=>'Create TipoPoste','url'=>array('create')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Nuevo','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -48,14 +48,6 @@ return false;
 		'nombre_corto',
 		'codigo',
 		'descripcion',
-		'estatus',
-		/*
-		'registrado_por',
-		'fecha_registro',
-		'modificado_por',
-		'fecha_modificado',
-		'eliminado',
-		*/
 array(
 'class'=>'bootstrap.widgets.TbButtonColumn',
 ),

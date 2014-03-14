@@ -4,12 +4,12 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'Create TipoRelacionVictima','url'=>array('create')),
-array('label'=>'Manage TipoRelacionVictima','url'=>array('admin')),
+array('label'=>'Nuevo','url'=>array('create')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>Tipo Relacion Victimas</h1>
+<h1>Tipo de Relacion de las Victimas</h1>
 
 <?php $this->widget('bootstrap.widgets.TbListView',array(
 'dataProvider'=>$dataProvider,

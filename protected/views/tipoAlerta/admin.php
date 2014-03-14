@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
 	'Tipo Alertas'=>array('index'),
-	'Manage',
+	'Administrar',
 );
 
 $this->menu=array(
-array('label'=>'List TipoAlerta','url'=>array('index')),
-array('label'=>'Create TipoAlerta','url'=>array('create')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Nuevo','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -23,7 +23,7 @@ return false;
 ");
 ?>
 
-<h1>Manage Tipo Alertas</h1>
+<h1>Admnistrar Tipo Alertas</h1>
 
 <p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
@@ -48,14 +48,6 @@ return false;
 		'nombre_corto',
 		'codigo',
 		'descripcion',
-		'estatus',
-		/*
-		'registrado_por',
-		'fecha_registro',
-		'modificado_por',
-		'fecha_modificado',
-		'eliminado',
-		*/
 array(
 'class'=>'bootstrap.widgets.TbButtonColumn',
 ),

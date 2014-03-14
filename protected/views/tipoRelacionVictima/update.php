@@ -2,17 +2,17 @@
 $this->breadcrumbs=array(
 	'Tipo Relacion Victimas'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Actualizar',
 );
 
 	$this->menu=array(
-	array('label'=>'List TipoRelacionVictima','url'=>array('index')),
-	array('label'=>'Create TipoRelacionVictima','url'=>array('create')),
-	array('label'=>'View TipoRelacionVictima','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage TipoRelacionVictima','url'=>array('admin')),
+	array('label'=>'Listar','url'=>array('index')),
+	array('label'=>'Nuevo','url'=>array('create')),
+	array('label'=>'Ver','url'=>array('view','id'=>$model->id)),
+	array('label'=>'Administrar','url'=>array('admin')),
 	);
 	?>
 
-	<h1>Update TipoRelacionVictima <?php echo $model->id; ?></h1>
+	<h1>Actualizar Tipo de Relacion de la Victima <?php echo $model->id; ?></h1>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

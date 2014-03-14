@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Telefonos'=>array('index'),
-	'Manage',
+	'Teléfonos'=>array('index'),
+	'Administrar',
 );
 
 $this->menu=array(
-array('label'=>'List Telefono','url'=>array('index')),
-array('label'=>'Create Telefono','url'=>array('create')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Nuevo','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -48,16 +48,8 @@ return false;
 		'compania',
 		'tipo',
 		'sms',
-		'internet',
-		/*
-		'descripcion',
-		'estatus',
-		'registrado_por',
-		'fecha_registro',
-		'modificado_por',
-		'fecha_modificado',
-		'eliminado',
-		*/
+		'internet',		
+		'descripcion',		
 array(
 'class'=>'bootstrap.widgets.TbButtonColumn',
 ),
