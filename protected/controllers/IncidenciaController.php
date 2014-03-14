@@ -56,25 +56,23 @@ class IncidenciaController extends Controller {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate() {
-        $model = new Incidencia;
+    public function actionCreate($id = 0) {
+        $model = $id == 0 ? new Incidencia : $this->loadModel($id);
         $modelIncidenciaTiempo = new IncidenciaTiempo;
 
 // Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
+        $this->performAjaxValidation($model);
 
         if (isset($_POST['Incidencia'])) {
             $model->attributes = $_POST['Incidencia'];
-            $modelIncidenciaTiempo->validate();            
+            $modelIncidenciaTiempo->validate();
             $model->registrado_por = 1;
             $model->modificado_por = 1;
-            if ($model->save()){                
-                
-                if($this->fn_validaIncidenciatiempo($model->id))
-                    $this->redirect(array('view', 'id' => $model->id));
-                
+            if ($model->save()) {
+                $this->redirect(array('create', 'id' => $model->id));
+//                if($this->fn_validaIncidenciatiempo($model->id))
+//                    $this->redirect(array('view', 'id' => $model->id));
             }
-                
         }
 
         $this->render('create', array(
@@ -82,13 +80,13 @@ class IncidenciaController extends Controller {
             'modelIncidenciaTiempo' => $modelIncidenciaTiempo
         ));
     }
-    
-    private function fn_validaIncidenciatiempo($id_incidencia){
+
+    private function fn_validaIncidenciatiempo($id_incidencia) {
         $retorno = false;
         if (isset($_POST['IncidenciaTiempo'])) {
             $modelIncidenciaTiempo = new IncidenciaTiempo;
             $modelIncidenciaTiempo->attributes = $_POST['IncidenciaTiempo'];
-            $modelIncidenciaTiempo->id_incidencia = $id_incidencia;            
+            $modelIncidenciaTiempo->id_incidencia = $id_incidencia;
             $retorno = $modelIncidenciaTiempo->save();
         }
         return $retorno;
@@ -101,6 +99,7 @@ class IncidenciaController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
+        $modelIncidenciaTiempo = new IncidenciaTiempo;
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
@@ -113,6 +112,7 @@ class IncidenciaController extends Controller {
 
         $this->render('update', array(
             'model' => $model,
+            'modelIncidenciaTiempo' => $modelIncidenciaTiempo
         ));
     }
 
