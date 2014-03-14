@@ -4,8 +4,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'Create TipoPoste','url'=>array('create')),
-array('label'=>'Manage TipoPoste','url'=>array('admin')),
+array('label'=>'Nuevo','url'=>array('create')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 

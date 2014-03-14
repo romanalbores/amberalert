@@ -1,18 +1,18 @@
 <?php
 $this->breadcrumbs=array(
-	'Tipo Alertas'=>array('index'),
+	'Tipo Alerta'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Actualizar',
 );
 
 	$this->menu=array(
-	array('label'=>'List TipoAlerta','url'=>array('index')),
-	array('label'=>'Create TipoAlerta','url'=>array('create')),
-	array('label'=>'View TipoAlerta','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage TipoAlerta','url'=>array('admin')),
+	array('label'=>'Listar','url'=>array('index')),
+	array('label'=>'Nuevo','url'=>array('create')),
+	array('label'=>'Ver','url'=>array('view','id'=>$model->id)),
+	array('label'=>'Administrar','url'=>array('admin')),
 	);
 	?>
 
-	<h1>Update TipoAlerta <?php echo $model->id; ?></h1>
+	<h1>Actualizar Tipo de Alerta <?php echo $model->id; ?></h1>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

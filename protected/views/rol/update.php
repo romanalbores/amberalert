@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Rols'=>array('index'),
+	'Roles'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Actualizar',
 );
 
 	$this->menu=array(
-	array('label'=>'List Rol','url'=>array('index')),
-	array('label'=>'Create Rol','url'=>array('create')),
-	array('label'=>'View Rol','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage Rol','url'=>array('admin')),
+	array('label'=>'Listar','url'=>array('index')),
+	array('label'=>'Nuevo','url'=>array('create')),
+	array('label'=>'Ver','url'=>array('view','id'=>$model->id)),
+	array('label'=>'Administrar','url'=>array('admin')),
 	);
 	?>
 

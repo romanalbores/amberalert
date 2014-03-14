@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Telefono Personas'=>array('index'),
-	'Create',
+	'Teléfono Personas'=>array('index'),
+	'Nuevo',
 );
 
 $this->menu=array(
-array('label'=>'List TelefonoPersona','url'=>array('index')),
-array('label'=>'Manage TelefonoPersona','url'=>array('admin')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>Create TelefonoPersona</h1>
+<h1>Nuevo Teléfono Persona</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

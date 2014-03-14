@@ -1,11 +1,11 @@
 <?php
 $this->breadcrumbs=array(
-	'Regions',
+	'Regiones',
 );
 
 $this->menu=array(
-array('label'=>'Create Region','url'=>array('create')),
-array('label'=>'Manage Region','url'=>array('admin')),
+array('label'=>'Nuevo','url'=>array('create')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 

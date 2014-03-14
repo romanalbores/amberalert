@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
 	'Tipo Relacion Victimas'=>array('index'),
-	'Create',
+	'Nuevo',
 );
 
 $this->menu=array(
-array('label'=>'List TipoRelacionVictima','url'=>array('index')),
-array('label'=>'Manage TipoRelacionVictima','url'=>array('admin')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>Create TipoRelacionVictima</h1>
+<h1>Nuevo Tipo de Relacion con la Victima</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

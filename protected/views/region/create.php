@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Regions'=>array('index'),
-	'Create',
+	'Regiones'=>array('index'),
+	'Nuevo',
 );
 
 $this->menu=array(
-array('label'=>'List Region','url'=>array('index')),
-array('label'=>'Manage Region','url'=>array('admin')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>Create Region</h1>
+<h1>Nueva Region</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

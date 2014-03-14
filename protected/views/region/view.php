@@ -1,19 +1,19 @@
 <?php
 $this->breadcrumbs=array(
-	'Regions'=>array('index'),
+	'Regiones'=>array('index'),
 	$model->id,
 );
 
 $this->menu=array(
-array('label'=>'List Region','url'=>array('index')),
-array('label'=>'Create Region','url'=>array('create')),
-array('label'=>'Update Region','url'=>array('update','id'=>$model->id)),
-array('label'=>'Delete Region','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-array('label'=>'Manage Region','url'=>array('admin')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Nuevo','url'=>array('create')),
+array('label'=>'Actualizar','url'=>array('update','id'=>$model->id)),
+array('label'=>'Eliminar','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>View Region #<?php echo $model->id; ?></h1>
+<h1>Ver Region #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 'data'=>$model,
@@ -22,12 +22,6 @@ array('label'=>'Manage Region','url'=>array('admin')),
 		'nombre',
 		'nombre_corto',
 		'codigo',
-		'descripcion',
-		'estatus',
-		'registrado_por',
-		'fecha_registro',
-		'modificado_por',
-		'fecha_modificado',
-		'eliminado',
+		'descripcion',		
 ),
 )); ?>

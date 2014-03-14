@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
 	'Zonas'=>array('index'),
-	'Manage',
+	'Administrar',
 );
 
 $this->menu=array(
-array('label'=>'List Zona','url'=>array('index')),
-array('label'=>'Create Zona','url'=>array('create')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Nuevo','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -49,14 +49,6 @@ return false;
 		'nombre_corto',
 		'codigo',
 		'descripcion',
-		/*
-		'estatus',
-		'registrado_por',
-		'fecha_registro',
-		'modificado_por',
-		'fecha_modificado',
-		'eliminado',
-		*/
 array(
 'class'=>'bootstrap.widgets.TbButtonColumn',
 ),

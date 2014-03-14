@@ -5,11 +5,11 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'List Zona','url'=>array('index')),
-array('label'=>'Manage Zona','url'=>array('admin')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>Create Zona</h1>
+<h1>Nueva Zona</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Tipo Alertas'=>array('index'),
-	'Create',
+	'Tipo Alerta'=>array('index'),
+	'Nuevo',
 );
 
 $this->menu=array(
-array('label'=>'List TipoAlerta','url'=>array('index')),
-array('label'=>'Manage TipoAlerta','url'=>array('admin')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>Create TipoAlerta</h1>
+<h1>Nuevo Tipo de Alerta</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

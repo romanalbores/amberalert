@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Tipo Vehiculos',
+	'Tipo Vehiculo',
 );
 
 $this->menu=array(
-array('label'=>'Create TipoVehiculo','url'=>array('create')),
-array('label'=>'Manage TipoVehiculo','url'=>array('admin')),
+array('label'=>'Nuevo','url'=>array('create')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>Tipo Vehiculos</h1>
+<h1>Tipo de Vehiculo</h1>
 
 <?php $this->widget('bootstrap.widgets.TbListView',array(
 'dataProvider'=>$dataProvider,

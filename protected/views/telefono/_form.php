@@ -7,17 +7,17 @@
 
 <?php echo $form->errorSummary($model); ?>
 
-	<?php echo $form->textFieldRow($model,'numero',array('class'=>'span5','maxlength'=>15)); ?>
+	<?php echo $form->textFieldRow($model,'Número',array('class'=>'span5','maxlength'=>15)); ?>
 
-	<?php echo $form->textFieldRow($model,'compania',array('class'=>'span5','maxlength'=>15)); ?>
+	<?php echo $form->textFieldRow($model,'compañia',array('class'=>'span5','maxlength'=>15)); ?>
 
-	<?php echo $form->textFieldRow($model,'tipo',array('class'=>'span5','maxlength'=>15)); ?>
+	<?php echo $form->textFieldRow($model,'Tipo',array('class'=>'span5','maxlength'=>15)); ?>
 
-	<?php echo $form->textFieldRow($model,'sms',array('class'=>'span5')); ?>
+	<?php echo $form->textFieldRow($model,'Sms',array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldRow($model,'internet',array('class'=>'span5')); ?>
+	<?php echo $form->textFieldRow($model,'Internet',array('class'=>'span5')); ?>
 
-	<?php echo $form->textAreaRow($model,'descripcion',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
+	<?php echo $form->textAreaRow($model,'Descripcion',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
 	 
 
