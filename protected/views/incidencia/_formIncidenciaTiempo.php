@@ -1,7 +1,7 @@
 <?php
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id' => 'incidencia-tiempo-form',
-    'enableAjaxValidation' => false,
+    'enableAjaxValidation' => true,
         ));
 ?>
 

@@ -1,7 +1,16 @@
 <?php
+Yii::app()->clientScript->registerScriptFile(
+        Yii::app()->request->baseUrl . "/js/incidencia.js", CClientScript::POS_END
+);
+
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
-    'id' => 'incidencia-form',
-    'enableAjaxValidation' => false,
+    'id' => 'incidencia-form',    
+//    'enableClientValidation' => true,
+    'enableAjaxValidation' => true,
+    'clientOptions' => array(
+        'validateOnSubmit' => true, // Required to perform AJAX validation on form submit
+        'afterValidate' => 'js:mySubmitFormFunction', // Your JS function to submit form
+    ),
         ));
 ?>
 <?php echo $form->errorSummary($model); ?>
