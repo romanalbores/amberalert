@@ -123,7 +123,8 @@ class Localidad extends CActiveRecord
 		$criteria->compare('modificado_por',$this->modificado_por);
 		$criteria->compare('fecha_modificado',$this->fecha_modificado,true);
 		$criteria->compare('eliminado',$this->eliminado);
-
+                $criteria->compare('estatus', 'ACTIVO');
+                $criteria->compare('eliminado', 0);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -144,5 +145,24 @@ class Localidad extends CActiveRecord
             ),
         );
     }
-        
+ 
+     public function obtenerListaLocalidad() {
+        $criteria = new CDbCriteria();
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        return $this->findAll($criteria);
+    }
+
+    public function getById($id) {
+        $criteria = new CDbCriteria;
+        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
+        return $criteria;
+    }
+
+     public function getByIdMunicipio($id_municipio) {
+        $criteria = new CDbCriteria;
+        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_municipio=" . $id_municipio;
+        return $criteria;
+    }
+    
 }

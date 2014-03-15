@@ -90,7 +90,6 @@ class ConfiguracionPoste extends CActiveRecord {
         // should not be searched.
 
         $criteria = new CDbCriteria;
-
         $criteria->compare('id', $this->id);
         $criteria->compare('id_poste_direccion', $this->id_poste_direccion);
         $criteria->compare('id_configuracion', $this->id_configuracion);
@@ -100,7 +99,8 @@ class ConfiguracionPoste extends CActiveRecord {
         $criteria->compare('modificado_por', $this->modificado_por);
         $criteria->compare('fecha_modificado', $this->fecha_modificado, true);
         $criteria->compare('eliminado', $this->eliminado);
-
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
@@ -120,6 +120,31 @@ class ConfiguracionPoste extends CActiveRecord {
                 'updatedByColumn' => 'fecha_modificado',
             ),
         );
+    }
+
+    public function getById($id) {
+        $criteria = new CDbCriteria;
+        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
+        return $criteria;
+    }
+
+    public function getByIdDía($id_configuracion_dia) {
+        $criteria = new CDbCriteria;
+        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_configuracion_dia=" . $id_configuracion_dia;
+        return $criteria;
+    }
+
+    public function getByFecha($fechaIni, $fechaFin) {
+        $criteria = new CDbCriteria;
+        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND fecha_dia BETWEEN (" . $fechaIni . " AND " . $fechaFin . ")";
+        return $criteria;
+    }
+
+    public function obtenerListaConfiguracionDiaHora() {
+        $criteria = new CDbCriteria();
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        return $this->findAll($criteria);
     }
 
 }

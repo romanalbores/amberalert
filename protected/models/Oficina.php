@@ -24,115 +24,109 @@
  * @property OficinaDepartamento[] $oficinaDepartamentos
  * @property OficinaDireccion[] $oficinaDireccions
  */
-class Oficina extends CActiveRecord
-{
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return Oficina the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
+class Oficina extends CActiveRecord {
 
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
-		return 'data_oficina';
-	}
+    /**
+     * Returns the static model of the specified AR class.
+     * @param string $className active record class name.
+     * @return Oficina the static model class
+     */
+    public static function model($className = __CLASS__) {
+        return parent::model($className);
+    }
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			array('id_organizacion, id_region, nombre, registrado_por, fecha_registro, modificado_por, fecha_modificado', 'required'),
-			array('id_organizacion, id_region, registrado_por, modificado_por, eliminado', 'numerical', 'integerOnly'=>true),
-			array('nombre', 'length', 'max'=>500),
-			array('nombre_corto', 'length', 'max'=>25),
-			array('codigo', 'length', 'max'=>12),
-			array('estatus', 'length', 'max'=>15),
-			array('descripcion', 'safe'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, id_organizacion, id_region, nombre, nombre_corto, codigo, descripcion, estatus, registrado_por, fecha_registro, modificado_por, fecha_modificado, eliminado', 'safe', 'on'=>'search'),
-		);
-	}
+    /**
+     * @return string the associated database table name
+     */
+    public function tableName() {
+        return 'data_oficina';
+    }
 
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-			'idOrganizacion' => array(self::BELONGS_TO, 'CataOrganizacion', 'id_organizacion'),
-			'idRegion' => array(self::BELONGS_TO, 'CataRegion', 'id_region'),
-			'oficinaDepartamentos' => array(self::HAS_MANY, 'OficinaDepartamento', 'id_oficina'),
-			'oficinaDireccions' => array(self::HAS_MANY, 'OficinaDireccion', 'id_oficina'),
-		);
-	}
+    /**
+     * @return array validation rules for model attributes.
+     */
+    public function rules() {
+        // NOTE: you should only define rules for those attributes that
+        // will receive user inputs.
+        return array(
+            array('id_organizacion, id_region, nombre, registrado_por, fecha_registro, modificado_por, fecha_modificado', 'required'),
+            array('id_organizacion, id_region, registrado_por, modificado_por, eliminado', 'numerical', 'integerOnly' => true),
+            array('nombre', 'length', 'max' => 500),
+            array('nombre_corto', 'length', 'max' => 25),
+            array('codigo', 'length', 'max' => 12),
+            array('estatus', 'length', 'max' => 15),
+            array('descripcion', 'safe'),
+            // The following rule is used by search().
+            // Please remove those attributes that should not be searched.
+            array('id, id_organizacion, id_region, nombre, nombre_corto, codigo, descripcion, estatus, registrado_por, fecha_registro, modificado_por, fecha_modificado, eliminado', 'safe', 'on' => 'search'),
+        );
+    }
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-			'id' => 'ID',
-			'id_organizacion' => 'Id Organizacion',
-			'id_region' => 'Id Region',
-			'nombre' => 'Nombre',
-			'nombre_corto' => 'Nombre Corto',
-			'codigo' => 'Codigo',
-			'descripcion' => 'Descripcion',
-			'estatus' => 'Estatus',
-			'registrado_por' => 'Registrado Por',
-			'fecha_registro' => 'Fecha Registro',
-			'modificado_por' => 'Modificado Por',
-			'fecha_modificado' => 'Fecha Modificado',
-			'eliminado' => 'Eliminado',
-		);
-	}
+    /**
+     * @return array relational rules.
+     */
+    public function relations() {
+        // NOTE: you may need to adjust the relation name and the related
+        // class name for the relations automatically generated below.
+        return array(
+            'idOrganizacion' => array(self::BELONGS_TO, 'CataOrganizacion', 'id_organizacion'),
+            'idRegion' => array(self::BELONGS_TO, 'CataRegion', 'id_region'),
+            'oficinaDepartamentos' => array(self::HAS_MANY, 'OficinaDepartamento', 'id_oficina'),
+            'oficinaDireccions' => array(self::HAS_MANY, 'OficinaDireccion', 'id_oficina'),
+        );
+    }
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+    /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels() {
+        return array(
+            'id' => 'ID',
+            'id_organizacion' => 'Id Organizacion',
+            'id_region' => 'Id Region',
+            'nombre' => 'Nombre',
+            'nombre_corto' => 'Nombre Corto',
+            'codigo' => 'Codigo',
+            'descripcion' => 'Descripcion',
+            'estatus' => 'Estatus',
+            'registrado_por' => 'Registrado Por',
+            'fecha_registro' => 'Fecha Registro',
+            'modificado_por' => 'Modificado Por',
+            'fecha_modificado' => 'Fecha Modificado',
+            'eliminado' => 'Eliminado',
+        );
+    }
 
-		$criteria=new CDbCriteria;
+    /**
+     * Retrieves a list of models based on the current search/filter conditions.
+     * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+     */
+    public function search() {
+        // Warning: Please modify the following code to remove attributes that
+        // should not be searched.
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('id_organizacion',$this->id_organizacion);
-		$criteria->compare('id_region',$this->id_region);
-		$criteria->compare('nombre',$this->nombre,true);
-		$criteria->compare('nombre_corto',$this->nombre_corto,true);
-		$criteria->compare('codigo',$this->codigo,true);
-		$criteria->compare('descripcion',$this->descripcion,true);
-		$criteria->compare('estatus',$this->estatus,true);
-		$criteria->compare('registrado_por',$this->registrado_por);
-		$criteria->compare('fecha_registro',$this->fecha_registro,true);
-		$criteria->compare('modificado_por',$this->modificado_por);
-		$criteria->compare('fecha_modificado',$this->fecha_modificado,true);
-		$criteria->compare('eliminado',$this->eliminado);
+        $criteria = new CDbCriteria;
+        $criteria->compare('id', $this->id);
+        $criteria->compare('id_organizacion', $this->id_organizacion);
+        $criteria->compare('id_region', $this->id_region);
+        $criteria->compare('nombre', $this->nombre, true);
+        $criteria->compare('nombre_corto', $this->nombre_corto, true);
+        $criteria->compare('codigo', $this->codigo, true);
+        $criteria->compare('descripcion', $this->descripcion, true);
+        $criteria->compare('estatus', $this->estatus, true);
+        $criteria->compare('registrado_por', $this->registrado_por);
+        $criteria->compare('fecha_registro', $this->fecha_registro, true);
+        $criteria->compare('modificado_por', $this->modificado_por);
+        $criteria->compare('fecha_modificado', $this->fecha_modificado, true);
+        $criteria->compare('eliminado', $this->eliminado);
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+        ));
+    }
 
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-        
-          public function behaviors() {
+    public function behaviors() {
         return array(
             'CTimestampBehavior' => array(
                 'class' => 'zii.behaviors.CTimestampBehavior',
@@ -147,5 +141,30 @@ class Oficina extends CActiveRecord
             ),
         );
     }
-        
+
+    public function obtenerListaOficinas() {
+        $criteria = new CDbCriteria();
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        return $this->findAll($criteria);
+    }
+
+    public function getById($id) {
+        $criteria = new CDbCriteria;
+        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
+        return $criteria;
+    }
+
+    public function getByIdRegion($id_region) {
+        $criteria = new CDbCriteria;
+        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_region=" . $id_region;
+        return $criteria;
+    }
+
+    public function getByIdOrganizacion($id_organizacion) {
+        $criteria = new CDbCriteria;
+        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id_organizacion;
+        return $criteria;
+    }
+
 }

@@ -134,5 +134,18 @@ class Telefono extends CActiveRecord
             ),
         );
     }
-        
+ 
+        public function obtenerListaTelefono() {
+        $criteria = new CDbCriteria();
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        return $this->findAll($criteria);
+    }
+
+    public function getById($id) {
+        $criteria = new CDbCriteria;
+        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
+        return $criteria;
+    }
+    
 }

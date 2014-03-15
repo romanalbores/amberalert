@@ -104,24 +104,19 @@ class Dia extends CActiveRecord {
         $criteria->compare('modificado_por', $this->modificado_por);
         $criteria->compare('fecha_modificado', $this->fecha_modificado, true);
         $criteria->compare('eliminado', $this->eliminado);
-
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
     }
 
-    public function getById($id){
-		$criteria=new CDbCriteria;
-		$criteria->condition=" id=".$id;
-		return $criteria;
-	}
-        
-   public function getByCode($code){
-		$criteria=new CDbCriteria;
-		$criteria->condition=" codigo=".$code;
-		return $criteria;
-	}                
-    
+    public function getByCode($code) {
+        $criteria = new CDbCriteria;
+        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND codigo=" . $code . " AND id=" . $id;
+        return $criteria;
+    }
+
     public function behaviors() {
         return array(
             'CTimestampBehavior' => array(
@@ -136,6 +131,19 @@ class Dia extends CActiveRecord {
                 'updatedByColumn' => 'fecha_modificado',
             ),
         );
+    }
+
+    public function getById($id) {
+        $criteria = new CDbCriteria;
+        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
+        return $criteria;
+    }
+
+    public function obtenerListaDía() {
+        $criteria = new CDbCriteria();
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        return $this->findAll($criteria);
     }
 
 }

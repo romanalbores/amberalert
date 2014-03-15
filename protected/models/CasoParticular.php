@@ -41,7 +41,7 @@ class CasoParticular extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('nombre, registrado_por, fecha_registro, modificado_por, fecha_modificado', 'required'),
+            array('nombre', 'required'),
             array('registrado_por, modificado_por, eliminado', 'numerical', 'integerOnly' => true),
             array('nombre', 'length', 'max' => 500),
             array('nombre_corto', 'length', 'max' => 25),
@@ -90,9 +90,7 @@ class CasoParticular extends CActiveRecord {
     public function search() {
         // Warning: Please modify the following code to remove attributes that
         // should not be searched.
-
         $criteria = new CDbCriteria;
-
         $criteria->compare('id', $this->id);
         $criteria->compare('nombre', $this->nombre, true);
         $criteria->compare('nombre_corto', $this->nombre_corto, true);
@@ -104,7 +102,8 @@ class CasoParticular extends CActiveRecord {
         $criteria->compare('modificado_por', $this->modificado_por);
         $criteria->compare('fecha_modificado', $this->fecha_modificado, true);
         $criteria->compare('eliminado', $this->eliminado);
-
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
@@ -116,8 +115,30 @@ class CasoParticular extends CActiveRecord {
      */
     public function obtenerListaCasoParticular() {
         $criteria = new CDbCriteria();
+        $criteria->compare('estatus', 'ACTIVO');
         $criteria->compare('eliminado', 0);
         return $this->findAll($criteria);
     }
 
+    public function getById($id) {
+        $criteria = new CDbCriteria;
+        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
+        return $criteria;
+    }
+
+    public function behaviors() {
+        return array(
+            'CTimestampBehavior' => array(
+                'class' => 'zii.behaviors.CTimestampBehavior',
+                'createAttribute' => 'registrado_por',
+                'updateAttribute' => 'modificado_por',
+                'setUpdateOnCreate' => true,
+            ),
+            'BlameableBehavior' => array(
+                'class' => 'application.components.behaviors.BlameableBehavior',
+                'createdByColumn' => 'fecha_registro',
+                'updatedByColumn' => 'fecha_modificado',
+            ),
+        );
+    }
 }
