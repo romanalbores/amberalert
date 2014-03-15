@@ -104,7 +104,8 @@ class TipoAlerta extends CActiveRecord {
         $criteria->compare('modificado_por', $this->modificado_por);
         $criteria->compare('fecha_modificado', $this->fecha_modificado, true);
         $criteria->compare('eliminado', $this->eliminado);
-
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
@@ -118,11 +119,7 @@ class TipoAlerta extends CActiveRecord {
      * Obtiene una lista de TipoAlerta que no hayan sido eliminados
      * @return TipoAlerta[]
      */
-    public function obtenerListaTipoAlerta() {
-        $criteria = new CDbCriteria();
-        $criteria->compare('eliminado', 0);
-        return $this->findAll($criteria);
-    }
+    
 
       public function behaviors() {
         return array(
@@ -139,5 +136,21 @@ class TipoAlerta extends CActiveRecord {
             ),
         );
     }
+
     
-}
+    public function obtenerListaTipoAlerta() {
+        $criteria = new CDbCriteria();
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        return $this->findAll($criteria);
+    }
+
+    public function getById($id) {
+        $criteria = new CDbCriteria;
+        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
+        return $criteria;
+    }
+
+    
+    
+} //----- rganizacion

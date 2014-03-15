@@ -139,5 +139,6 @@ class Organizacion extends CActiveRecord {
         $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
         return $criteria;
     }
-
+ 
+    
 }
