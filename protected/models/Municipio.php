@@ -145,14 +145,18 @@ class Municipio extends CActiveRecord {
 
     public function getById($id) {
         $criteria = new CDbCriteria;
-        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
-        return $criteria;
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        $criteria->compare('id', $id);
+        return $this->findAll($criteria);
     }
 
     public function getByIdEstado($id_estado) {
         $criteria = new CDbCriteria;
-        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_estado=" . $id_estado;
-        return $criteria;
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        $criteria->compare('id_estado', $id_estado);
+        return $this->findAll($criteria);
     }
 
 }

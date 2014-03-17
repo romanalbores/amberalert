@@ -155,14 +155,23 @@ class Localidad extends CActiveRecord
 
     public function getById($id) {
         $criteria = new CDbCriteria;
-        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
-        return $criteria;
+         $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        $criteria->compare('id', $id);
+        
+        return $this->findAll($criteria);
+     //   $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
+     //   return $criteria;
     }
 
      public function getByIdMunicipio($id_municipio) {
         $criteria = new CDbCriteria;
-        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_municipio=" . $id_municipio;
-        return $criteria;
+         $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        $criteria->compare('id_municipio', $id_municipio);
+        return $this->findAll($criteria);
+     //   $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_municipio=" . $id_municipio;
+     //   return $criteria;
     }
     
 }

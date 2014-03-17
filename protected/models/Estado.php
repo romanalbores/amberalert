@@ -145,14 +145,21 @@ class Estado extends CActiveRecord {
 
     public function getById($id) {
         $criteria = new CDbCriteria;
-        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        $criteria->compare('id', $id);
+        return $this->findAll($criteria);
         return $criteria;
     }
 
     public function getByIdPais($id_pais) {
         $criteria = new CDbCriteria;
-        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_pais=" . $id_pais;
-        return $criteria;
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        $criteria->compare('id_pais', $id_pais);
+        return $this->findAll($criteria);
+        //$criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_pais=" . $id_pais;
+        //return $criteria;
     }
 
 }
