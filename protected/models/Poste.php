@@ -66,8 +66,8 @@ class Poste extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'idTipoPoste' => array(self::BELONGS_TO, 'CataTipoPoste', 'id_tipo_poste'),
-            'posteDireccions' => array(self::HAS_MANY, 'PosteDireccion', 'id_poste'),
+            'idTipoPoste' => array(self::BELONGS_TO, 'nombre', 'id_tipo_poste'),
+            'posteDireccion' => array(self::HAS_MANY, 'dir_ip', 'id_poste'),
         );
     }
 

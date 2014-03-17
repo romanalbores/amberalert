@@ -57,13 +57,14 @@ class TipoPosteController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model = new TipoPoste;
-
+        $model = new TipoPoste;               
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
         if (isset($_POST['TipoPoste'])) {
             $model->attributes = $_POST['TipoPoste'];
+            $model->registrado_por = 1;
+            $model->modificado_por = 1;            
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
@@ -79,7 +80,7 @@ class TipoPosteController extends Controller {
      * @param integer $id the ID of the model to be updated
      */
     public function actionUpdate($id) {
-        $model = $this->loadModel($id);
+        $model = $this->loadModel($id);                       
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);

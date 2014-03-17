@@ -27,7 +27,7 @@
                                 'itemOptions' => array('id' => 'itemAlerta'),
                                 'items' => array(
                                     array('label' => 'Incidencia', 'url' => array('/Incidencia')),
-                                    array('label' => 'Configuracón de Alertas', 'url' => array('/Configuracion')),
+                                    array('label' => 'Configuración de Alertas', 'url' => array('/Configuracion')),
                                     array('label' => 'Personas Registradas', 'url' => array('/Persona')),
                                 ), 'visible' => !Yii::app()->user->isGuest),
                             array(
@@ -56,7 +56,7 @@
                                         'items' => array(
                                             array('label' => 'Tipo de Caso Particular', 'url' => array('/CasoParticular')),
                                             array('label' => 'Tipo de Naturaleza', 'url' => array('/TipoNaturaleza')),
-                                            array('label' => 'Tipo de Relación', 'url' => array('/TipoRelacion')),
+                                            array('label' => 'Tipo de Relación Victima', 'url' => array('/TipoRelacionVictima')),
                                             array('label' => 'Tipo Vehiculo', 'url' => array('/TipoVehiculo')),
                                             array('label' => 'Tipo de Poste', 'url' => array('/TipoPoste')),
                                         )),
