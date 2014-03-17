@@ -25,7 +25,7 @@ class EstadoController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
+                'actions' => array('index', 'view','GetByIdPais'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -80,10 +80,6 @@ class EstadoController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
-
         if (isset($_POST['Estado'])) {
             $model->attributes = $_POST['Estado'];
             if ($model->save())
@@ -157,4 +153,14 @@ class EstadoController extends Controller {
         }
     }
 
+    public function actionGetByIdPais() {
+       $model=new Estado;
+       $model->attributes = $_POST['Estado'];
+       $data = Estado::model()->getByIdPais($model->id_pais);
+       $data = CHtml::listData($data, 'id', 'nombre');
+        echo CHtml::tag('option', array('value' => ''), CHtml::encode('Seleccionar Estado'), true);
+        foreach ($data as $value => $name) {             
+            echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
+        }
+    }
 }

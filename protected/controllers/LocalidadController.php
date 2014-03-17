@@ -26,7 +26,7 @@ class LocalidadController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
+                'actions' => array('index', 'view','GetByIdMunicipio'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -160,4 +160,15 @@ class LocalidadController extends Controller {
         }
     }
 
+     public function actionGetByIdMunicipio() {
+       $model=new Localidad;
+       $model->attributes = $_POST['Localidad'];
+       $data = Localidad::model()->getByIdMunicipio($model->id_municipio);
+       $data = CHtml::listData($data, 'id', 'nombre');
+        echo CHtml::tag('option', array('value' => ''), CHtml::encode('Seleccionar Localidad'), true);
+        foreach ($data as $value => $name) {             
+            echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
+        }
+    }
+    
 }

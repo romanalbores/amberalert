@@ -157,9 +157,7 @@ class Estado extends CActiveRecord {
         $criteria->compare('estatus', 'ACTIVO');
         $criteria->compare('eliminado', 0);
         $criteria->compare('id_pais', $id_pais);
-        return $this->findAll($criteria);
-        //$criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_pais=" . $id_pais;
-        //return $criteria;
+        return $this->findAll($criteria);        
     }
 
 }
