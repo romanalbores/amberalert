@@ -19,7 +19,7 @@ array('label'=>'Administrar','url'=>array('admin')),
 'data'=>$model,
 'attributes'=>array(
 		'id',
-		'id_localidad',
+		'id_asentamiento',
 		'calle',
 		'colonia',
 		'localidad',

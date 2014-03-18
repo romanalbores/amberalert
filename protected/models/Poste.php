@@ -77,7 +77,7 @@ class Poste extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'id_tipo_poste' => 'Id Tipo Poste',
+            'id_tipo_poste' => 'Poste',
             'nombre' => 'Nombre',
             'nombre_corto' => 'Nombre Corto',
             'codigo' => 'Codigo',

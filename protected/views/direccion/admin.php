@@ -44,7 +44,7 @@ return false;
 'filter'=>$model,
 'columns'=>array(
 		'id',
-		'id_localidad',
+		'id_asentamiento',
 		'calle',
 		'colonia',
 		'localidad',

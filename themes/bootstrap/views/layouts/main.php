@@ -45,8 +45,10 @@
                                             array('label' => 'País', 'url' => array('/Pais')),
                                             array('label' => 'Estados', 'url' => array('/Estado')),
                                             array('label' => 'Municipios', 'url' => array('/Municipio')),
-                                            array('label' => 'Localidades', 'url' => array('/Localidad')),
+                                            array('label' => 'Localidades', 'url' => array('/Localidad')),                                            
+                                            array('label' => 'Asentamientos', 'url' => array('/Asentamiento')),
                                             array('label' => 'Direcciones', 'url' => array('/Direccion')),
+                                            array('label' => 'Tipo Asentamiento', 'url' => array('/TipoAsentamiento')),
                                         )),
                                     array(
                                         'label' => 'Sistema',
@@ -56,7 +58,7 @@
                                         'items' => array(
                                             array('label' => 'Tipo de Caso Particular', 'url' => array('/CasoParticular')),
                                             array('label' => 'Tipo de Naturaleza', 'url' => array('/TipoNaturaleza')),
-                                            array('label' => 'Tipo de Relación Victima', 'url' => array('/TipoRelacionVictima')),
+                                            array('label' => 'Tipo de Relación Victima', 'url' => array('/TipoRelacionVictima')),                                            
                                             array('label' => 'Tipo Vehiculo', 'url' => array('/TipoVehiculo')),
                                             array('label' => 'Tipo de Poste', 'url' => array('/TipoPoste')),
                                         )),

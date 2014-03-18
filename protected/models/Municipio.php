@@ -77,7 +77,7 @@ class Municipio extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'id_estado' => 'Id Estado',
+            'id_estado' => 'Estado',
             'nombre' => 'Nombre',
             'nombre_corto' => 'Nombre Corto',
             'codigo' => 'Codigo',

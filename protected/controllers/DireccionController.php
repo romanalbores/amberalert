@@ -58,6 +58,10 @@ class DireccionController extends Controller {
      */
     public function actionCreate() {
         $model = new Direccion;
+        $modelAsentamiento = new Asentamiento;
+        $modelLocalidad = new Localidad;
+        $modelMunicipio = new Municipio;
+        $modelEstado = new Estado;
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
@@ -70,6 +74,10 @@ class DireccionController extends Controller {
 
         $this->render('create', array(
             'model' => $model,
+            'modelAsentamiento' => $modelAsentamiento,
+            'modelLocalidad' => $modelLocalidad,
+            'modelMunicipio' => $modelMunicipio,
+            'modelEstado' => $modelEstado,
         ));
     }
 
@@ -80,7 +88,6 @@ class DireccionController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
@@ -92,6 +99,10 @@ class DireccionController extends Controller {
 
         $this->render('update', array(
             'model' => $model,
+            'modelAsentamiento' => $modelAsentamiento,
+            'modelLocalidad' => $modelLocalidad,
+            'modelMunicipio' => $modelMunicipio,
+            'modelEstado' => $modelEstado,
         ));
     }
 
@@ -101,7 +112,6 @@ class DireccionController extends Controller {
      * @param integer $id the ID of the model to be deleted
      */
     public function actionDelete($id) {
-
         $model = $this->loadModel($id);
         $model->estatus = 'ELIMINADO';
         $model->eliminado = 1;

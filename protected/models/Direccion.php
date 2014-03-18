@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'cata_direccion':
  * @property integer $id
- * @property integer $id_localidad
+ * @property integer $id_asentamiento
  * @property string $calle
  * @property string $colonia
  * @property string $localidad
@@ -46,13 +46,13 @@ class Direccion extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('id, registrado_por, fecha_registro, modificado_por, fecha_modificado', 'required'),
-            array('id, id_localidad, registrado_por, modificado_por, eliminado', 'numerical', 'integerOnly' => true),
+            array('id, id_asentamiento, registrado_por, modificado_por, eliminado', 'numerical', 'integerOnly' => true),
             array('calle', 'length', 'max' => 1000),
             array('colonia, localidad', 'length', 'max' => 500),
             array('codigo_postal, estatus', 'length', 'max' => 15),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, id_localidad, calle, colonia, localidad, codigo_postal, estatus, registrado_por, fecha_registro, modificado_por, fecha_modificado, eliminado', 'safe', 'on' => 'search'),
+            array('id, id_asentamiento, calle, colonia, localidad, codigo_postal, estatus, registrado_por, fecha_registro, modificado_por, fecha_modificado, eliminado', 'safe', 'on' => 'search'),
         );
     }
 
@@ -63,7 +63,7 @@ class Direccion extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'idLocalidad' => array(self::BELONGS_TO, 'Localidad', 'id_localidad'),
+            'idAsentamiento' => array(self::BELONGS_TO, 'Asentamiento', 'id_asentamiento'),
         );
     }
 
@@ -73,7 +73,7 @@ class Direccion extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'id_localidad' => 'Id Localidad',
+            'id_asentamiento' => 'Asentamiento',
             'calle' => 'Calle',
             'colonia' => 'Colonia',
             'localidad' => 'Localidad',
@@ -98,7 +98,7 @@ class Direccion extends CActiveRecord {
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id);
-        $criteria->compare('id_localidad', $this->id_localidad);
+        $criteria->compare('id_asentamiento', $this->id_asentamiento);
         $criteria->compare('calle', $this->calle, true);
         $criteria->compare('colonia', $this->colonia, true);
         $criteria->compare('localidad', $this->localidad, true);

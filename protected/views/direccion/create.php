@@ -10,6 +10,6 @@ array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>Registrar Direccion</h1>
+<h1>Registrar Dirección</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model,'modelAsentamiento'=>$modelAsentamiento,  'modelLocalidad'=>$modelLocalidad,'modelMunicipio'=>$modelMunicipio,'modelEstado'=>$modelEstado ));  ?>

@@ -84,7 +84,7 @@ class Localidad extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'id_municipio' => 'Id Municipio',
+			'id_municipio' => 'Municipio',
 			'nombre' => 'Nombre',
 			'nombre_corto' => 'Nombre Corto',
 			'codigo' => 'Codigo',
@@ -169,9 +169,7 @@ class Localidad extends CActiveRecord
          $criteria->compare('estatus', 'ACTIVO');
         $criteria->compare('eliminado', 0);
         $criteria->compare('id_municipio', $id_municipio);
-        return $this->findAll($criteria);
-     //   $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_municipio=" . $id_municipio;
-     //   return $criteria;
+        return $this->findAll($criteria);     
     }
     
 }

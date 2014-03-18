@@ -5,7 +5,7 @@
 
 		<?php echo $form->textFieldRow($model,'id',array('class'=>'span5')); ?>
 
-		<?php echo $form->textFieldRow($model,'id_localidad',array('class'=>'span5')); ?>
+		<?php echo $form->textFieldRow($model,'id_asentamiento',array('class'=>'span5')); ?>
 
 		<?php echo $form->textFieldRow($model,'calle',array('class'=>'span5','maxlength'=>1000)); ?>
 

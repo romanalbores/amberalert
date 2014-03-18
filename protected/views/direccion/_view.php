@@ -4,8 +4,8 @@
 	<?php echo CHtml::link(CHtml::encode($data->id),array('view','id'=>$data->id)); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id_localidad')); ?>:</b>
-	<?php echo CHtml::encode($data->id_localidad); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('id_asentamiento')); ?>:</b>
+	<?php echo CHtml::encode($data->id_asentamiento); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('calle')); ?>:</b>
