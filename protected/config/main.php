@@ -69,6 +69,13 @@ return array(
             'password' => 'zSXFwE;~AqTQ',
             'charset' => 'utf8',
         ),
+        'db' => array(
+            'connectionString' => 'mysql:host=localhost;dbname=yisusmon_amblert',
+            'emulatePrepare' => true,
+            'username' => 'highbits_rndrmtn',
+            'password' => 'r3nder',
+            'charset' => 'utf8',
+        ),
         'errorHandler' => array(
             // use 'site/error' action to display errors
             'errorAction' => 'site/error',

@@ -14,4 +14,12 @@ Este es un comentario de prueba para el commit para ver que se haya hecho la mod
 
 <h1>Crear Incidencia</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model,'modelIncidenciaTiempo' => $modelIncidenciaTiempo)); ?>
+<?php echo $this->renderPartial('_form', 
+            array('model'=>$model,
+                'modelIncidenciaTiempo' => $modelIncidenciaTiempo,
+                'modelPersonaMenor' => $modelPersonaMenor,
+                'modelPersonaMenorCaracteristica' => $modelPersonaMenorCaracteristica,
+                'modelPersonaMenorVestimenta' => $modelPersonaMenorVestimenta
+            )
+        ); 
+?>

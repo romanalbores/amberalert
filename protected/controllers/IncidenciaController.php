@@ -59,6 +59,9 @@ class IncidenciaController extends Controller {
     public function actionCreate($id = 0) {
         $model = $id == 0 ? new Incidencia : $this->loadModel($id);
         $modelIncidenciaTiempo = new IncidenciaTiempo;
+        $modelPersonaMenor = new Persona();
+        $modelPersonaMenorCaracteristica = new PersonaCaracteristica();
+        $modelPersonaMenorVestimenta = new PersonaVestimenta();
 
 // Uncomment the following line if AJAX validation is needed
         $this->performAjaxValidation($model);
@@ -77,7 +80,10 @@ class IncidenciaController extends Controller {
 
         $this->render('create', array(
             'model' => $model,
-            'modelIncidenciaTiempo' => $modelIncidenciaTiempo
+            'modelIncidenciaTiempo' => $modelIncidenciaTiempo,
+            'modelPersonaMenor' => $modelPersonaMenor,
+            'modelPersonaMenorCaracteristica' => $modelPersonaMenorCaracteristica,
+            'modelPersonaMenorVestimenta' => $modelPersonaMenorVestimenta
         ));
     }
 

@@ -19,6 +19,10 @@
 <?php
 $formIncidencia = $this->renderPartial('_formIncidencia', array('model' => $model, 'modelIncidenciaTiempo' => $modelIncidenciaTiempo), true, false);
 $formIncidenciaTiempo = $this->renderPartial('_formIncidenciaTiempo', array('model' => $modelIncidenciaTiempo), true, false);
+$formPersonaMenor = $this->renderPartial('_formPersona', array('model' => $modelPersonaMenor), true, false);
+$formPersonaMenorCaracteristica = $this->renderPartial('_formPersonaCaracteristica', array('model' => $modelPersonaMenorCaracteristica), true, false);
+$formPersonaMenorVestimenta = $this->renderPartial('_formPersonaVestimenta', array('model' => $modelPersonaMenorVestimenta), true, false);
+
 
 $this->widget(
         'bootstrap.widgets.TbWizard', array(
@@ -45,8 +49,10 @@ $("#wizard-bar > .bar").css({width:$percent+"%"});
             'content' => $formIncidencia,
             'active' => true
         ),
-        array('label' => 'Incidencia Tiempo', 'content' => $formIncidenciaTiempo),
-        array('label' => 'Messages', 'content' => 'Messages Content'),
+        array('label' => 'Tiempos', 'content' => $formIncidenciaTiempo),
+        array('label' => 'Persona Menor', 'content' => $formPersonaMenor),
+        array('label' => 'Persona Menor Caracteristicas', 'content' => $formPersonaMenorCaracteristica),
+        array('label' => 'Persona Menor Vestimenta', 'content' => $formPersonaMenorVestimenta),
     ),
         )
 );
