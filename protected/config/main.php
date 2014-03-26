@@ -70,10 +70,10 @@ return array(
             'charset' => 'utf8',
         ),
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=yisusmon_amblert',
+            'connectionString' => 'mysql:host=jesusmontes.mx;dbname=yisusmon_amblert',
             'emulatePrepare' => true,
-            'username' => 'highbits_rndrmtn',
-            'password' => 'r3nder',
+            'username' => 'yisusmon_userdb',
+            'password' => 'zSXFwE;~AqTQ',
             'charset' => 'utf8',
         ),
         'errorHandler' => array(
