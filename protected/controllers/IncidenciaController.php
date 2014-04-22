@@ -57,6 +57,9 @@ class IncidenciaController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate($id = 0) {
+        
+        $this->layout = '//layouts/column1';
+        
         $model = $id == 0 ? new Incidencia : $this->loadModel($id);
         $modelIncidenciaTiempo = new IncidenciaTiempo;
         $modelPersonaMenor = new Persona();

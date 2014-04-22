@@ -19,9 +19,9 @@
 <?php
 $formIncidencia = $this->renderPartial('_formIncidencia', array('model' => $model, 'modelIncidenciaTiempo' => $modelIncidenciaTiempo), true, false);
 $formIncidenciaTiempo = $this->renderPartial('_formIncidenciaTiempo', array('model' => $modelIncidenciaTiempo), true, false);
-$formPersonaMenor = $this->renderPartial('_formPersona', array('model' => $modelPersonaMenor), true, false);
-$formPersonaMenorCaracteristica = $this->renderPartial('_formPersonaCaracteristica', array('model' => $modelPersonaMenorCaracteristica), true, false);
-$formPersonaMenorVestimenta = $this->renderPartial('_formPersonaVestimenta', array('model' => $modelPersonaMenorVestimenta), true, false);
+$formPersonaMenor = $this->renderPartial('_formPersona', array('model' => $modelPersonaMenor, 'modelPersonaMenorCaracteristica'=>$modelPersonaMenorCaracteristica,'modelPersonaMenorVestimenta'=>$modelPersonaMenorVestimenta), true, false);
+$formPersonaMenorCaracteristica = $this->renderPartial('_formPersona', array('model' => $modelPersonaMenor, 'modelPersonaMenorCaracteristica'=>$modelPersonaMenorCaracteristica,'modelPersonaMenorVestimenta'=>$modelPersonaMenorVestimenta), true, false);
+$formVehiculoSospechoso = $this->renderPartial('_formPersonaCaracteristicaVehiculoSospechoso', array('model' => new PersonaCaracteristicaVehiculo()), true, false);
 
 
 $this->widget(
@@ -50,9 +50,9 @@ $("#wizard-bar > .bar").css({width:$percent+"%"});
             'active' => true
         ),
         array('label' => 'Tiempos', 'content' => $formIncidenciaTiempo),
-        array('label' => 'Persona Menor', 'content' => $formPersonaMenor),
-        array('label' => 'Persona Menor Caracteristicas', 'content' => $formPersonaMenorCaracteristica),
-        array('label' => 'Persona Menor Vestimenta', 'content' => $formPersonaMenorVestimenta),
+        array('label' => 'El menor', 'content' => $formPersonaMenor),
+        array('label' => 'Sospechoso', 'content' => $formPersonaMenorCaracteristica),
+        array('label' => 'Vehiculo sospechoso', 'content' => $formVehiculoSospechoso),
     ),
         )
 );

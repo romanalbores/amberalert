@@ -25,17 +25,6 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 <?php echo $form->textAreaRow($model, 'caracteristicas_peculiares', array('rows' => 6, 'cols' => 50, 'class' => 'span8')); ?>
 
-<?php echo $form->textFieldRow($model, 'estatus', array('class' => 'span5', 'maxlength' => 15)); ?>
-
-<?php echo $form->textFieldRow($model, 'registrado_por', array('class' => 'span5')); ?>
-
-<?php echo $form->textFieldRow($model, 'fecha_registro', array('class' => 'span5')); ?>
-
-<?php echo $form->textFieldRow($model, 'modificado_por', array('class' => 'span5')); ?>
-
-<?php echo $form->textFieldRow($model, 'fecha_modificado', array('class' => 'span5')); ?>
-
-    <?php echo $form->textFieldRow($model, 'eliminado', array('class' => 'span5')); ?>
 
 <div class="form-actions"> 
     <?php

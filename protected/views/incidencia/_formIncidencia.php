@@ -77,11 +77,11 @@ echo $form->checkBoxRow(
 
 <div class="form-actions">
     <?php
-    $this->widget('bootstrap.widgets.TbButton', array(
-        'buttonType' => 'submit',
-        'type' => 'primary',
-        'label' => $model->isNewRecord ? 'Create' : 'Guardar',
-    ));
+//    $this->widget('bootstrap.widgets.TbButton', array(
+//        'buttonType' => 'submit',
+//        'type' => 'primary',
+//        'label' => $model->isNewRecord ? 'Create' : 'Guardar',
+//    ));
     ?>
 </div>
 <?php $this->endWidget(); ?>
