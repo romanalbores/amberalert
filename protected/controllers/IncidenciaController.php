@@ -60,24 +60,40 @@ class IncidenciaController extends Controller {
         
         $this->layout = '//layouts/column1';
         
-        $model = $id == 0 ? new Incidencia : $this->loadModel($id);
-        $modelIncidenciaTiempo = new IncidenciaTiempo;
+        $model = $id == 0 ? new Incidencia : $this->loadModel($id);        
+        $modelIncidenciaTiempoFound = IncidenciaTiempo::model()->find(IncidenciaTiempo::model()->obtenerIncidenciaTiempoPorIdIncidencia($model->id));
+        $modelIncidenciaTiempo = $modelIncidenciaTiempoFound != null ? $modelIncidenciaTiempoFound : new IncidenciaTiempo;
+        if($model->id > 0){
+            $modelIncidenciaTiempo->id_incidencia = $model->id; 
+        }
+        
         $modelPersonaMenor = new Persona();
         $modelPersonaMenorCaracteristica = new PersonaCaracteristica();
         $modelPersonaMenorVestimenta = new PersonaVestimenta();
+        $returnStep = isset($_GET['next_step']) ? $_GET['next_step'] : -1;
 
 // Uncomment the following line if AJAX validation is needed
         $this->performAjaxValidation($model);
+        $this->performAjaxValidationIncidenciaTiempo($modelIncidenciaTiempo);
+        $this->performAjaxValidationPersonaMenor($modelPersonaMenor);
+
+        // Insercion y actualizacion de incidencia tiempo
+        $this->fn_performAjaxValidationIncidenciatiempo($modelIncidenciaTiempo);
+        // Insercion y actualizacion de persona menor
+        $this->fn_performAjaxValidationPersonaMenor($model->id);
 
         if (isset($_POST['Incidencia'])) {
             $model->attributes = $_POST['Incidencia'];
             $modelIncidenciaTiempo->validate();
             $model->registrado_por = 1;
             $model->modificado_por = 1;
-            if ($model->save()) {
-                $this->redirect(array('create', 'id' => $model->id));
-//                if($this->fn_validaIncidenciatiempo($model->id))
-//                    $this->redirect(array('view', 'id' => $model->id));
+            if ($model->save()) {  
+
+                $returnStep = isset($_POST['next_step']) ? $_POST['next_step'] : -1;           
+                $returnUrl = Yii::app()->createUrl('Incidencia/Create',array('id'=>$model->id,'next_step'=>$returnStep));
+                echo CJSON::encode(array('result'=>true,'data'=>$returnUrl));
+                Yii::app()->end();
+                //$this->redirect(array('create', 'id' => $model->id));
             }
         }
 
@@ -86,20 +102,40 @@ class IncidenciaController extends Controller {
             'modelIncidenciaTiempo' => $modelIncidenciaTiempo,
             'modelPersonaMenor' => $modelPersonaMenor,
             'modelPersonaMenorCaracteristica' => $modelPersonaMenorCaracteristica,
-            'modelPersonaMenorVestimenta' => $modelPersonaMenorVestimenta
+            'modelPersonaMenorVestimenta' => $modelPersonaMenorVestimenta,
+            'returnStep' => $returnStep
         ));
     }
 
-    private function fn_validaIncidenciatiempo($id_incidencia) {
-        $retorno = false;
+    private function fn_performAjaxValidationIncidenciatiempo($modelIncidenciaTiempo) {                
         if (isset($_POST['IncidenciaTiempo'])) {
-            $modelIncidenciaTiempo = new IncidenciaTiempo;
-            $modelIncidenciaTiempo->attributes = $_POST['IncidenciaTiempo'];
-            $modelIncidenciaTiempo->id_incidencia = $id_incidencia;
-            $retorno = $modelIncidenciaTiempo->save();
-        }
-        return $retorno;
+            $modelIncidenciaTiempo->attributes = $_POST['IncidenciaTiempo'];      
+            $modelIncidenciaTiempo->registrado_por = 1;
+            $modelIncidenciaTiempo->modificado_por = 1;      
+            $saved = $modelIncidenciaTiempo->save();
+            if($saved){
+                $returnStep = isset($_POST['next_step']) ? $_POST['next_step'] : -1;
+                $returnUrl = Yii::app()->createUrl('Incidencia/Create',array('id'=>$modelIncidenciaTiempo->id_incidencia,'next_step'=>$returnStep));
+                echo CJSON::encode(array('result'=>true,'data'=>$returnUrl));
+                Yii::app()->end();
+            }            
+        }        
     }
+
+    private function fn_performAjaxValidationPersonaMenor($id_incidencia) {                
+            if (isset($_POST['Persona'])) {
+                //$modelIncidenciaTiempo->attributes = $_POST['Persona'];      
+                //$modelIncidenciaTiempo->registrado_por = 1;
+                //$modelIncidenciaTiempo->modificado_por = 1;      
+                //$saved = $modelIncidenciaTiempo->save();
+                //if($saved){
+                    $returnStep = isset($_POST['next_step']) ? $_POST['next_step'] : -1;
+                    $returnUrl = Yii::app()->createUrl('Incidencia/Create',array('id'=>$id_incidencia,'next_step'=>$returnStep));
+                    echo CJSON::encode(array('result'=>true,'data'=>$returnUrl));
+                    Yii::app()->end();
+                //}            
+            }        
+        }
 
     /**
      * Updates a particular model.
@@ -184,7 +220,27 @@ class IncidenciaController extends Controller {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'incidencia-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
-        }
+        }        
+    }
+    /**
+     * Performs the AJAX validation.
+     * @param CModel the model to be validated
+     */
+    protected function performAjaxValidationIncidenciaTiempo($model) {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'incidencia-tiempo-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }        
+    }
+    /**
+     * Performs the AJAX validation.
+     * @param CModel the model to be validated
+     */
+    protected function performAjaxValidationPersonaMenor($model) {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'persona-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }        
     }
 
 }

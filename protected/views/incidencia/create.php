@@ -8,6 +8,15 @@ $this->menu=array(
 array('label'=>'Listar','url'=>array('index')),
 array('label'=>'Administrar','url'=>array('admin')),
 );
+/**
+* INCLUDES DE SCRIPTS
+*/
+Yii::app()->clientScript->registerScriptFile(
+	Yii::app()->request->baseUrl . "/js/functions.js", CClientScript::POS_END
+);
+Yii::app()->clientScript->registerScriptFile(
+	Yii::app()->request->baseUrl . "/js/incidencia.js", CClientScript::POS_END
+);
 ?>
 
 Este es un comentario de prueba para el commit para ver que se haya hecho la modificación 
@@ -19,7 +28,8 @@ Este es un comentario de prueba para el commit para ver que se haya hecho la mod
                 'modelIncidenciaTiempo' => $modelIncidenciaTiempo,
                 'modelPersonaMenor' => $modelPersonaMenor,
                 'modelPersonaMenorCaracteristica' => $modelPersonaMenorCaracteristica,
-                'modelPersonaMenorVestimenta' => $modelPersonaMenorVestimenta
+                'modelPersonaMenorVestimenta' => $modelPersonaMenorVestimenta,
+                'returnStep' => $returnStep
             )
         ); 
 ?>

@@ -2,14 +2,18 @@
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id' => 'incidencia-tiempo-form',
     'enableAjaxValidation' => true,
+    'clientOptions' => array(
+        'validateOnSubmit' => true, // Required to perform AJAX validation on form submit
+        'afterValidate' => 'js:mySubmitFormFunction', // Your JS function to submit form
+    ),
         ));
 ?>
 
-<p class="help-block">Fields with <span class="required">*</span> are required.</p>
+<p class="help-block">Campos con <span class="required">*</span> son requeridos.</p>
 
 <?php echo $form->errorSummary($model); ?>
 
-<?php echo $form->textFieldRow($model, 'id_incidencia', array('class' => 'span5')); ?>
+<?php echo $form->hiddenField($model, 'id_incidencia', array('class' => 'span5')); ?>
 
 <?php echo $form->textAreaRow($model, 'consideracion_lugar', array('rows' => 6, 'cols' => 50, 'class' => 'span5')); ?>
 

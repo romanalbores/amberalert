@@ -47,7 +47,7 @@ class IncidenciaTiempo extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('id_incidencia, registrado_por, fecha_registro, modificado_por, fecha_modificado', 'required'),
+            array('id_incidencia, consideracion_lugar, registrado_por, fecha_registro, modificado_por, fecha_modificado', 'required'),
             array('id_incidencia, registrado_por, modificado_por, eliminado', 'numerical', 'integerOnly' => true),
             array('circunstancia_sospechosa', 'length', 'max' => 1000),
             array('estatus', 'length', 'max' => 15),
@@ -120,6 +120,7 @@ class IncidenciaTiempo extends CActiveRecord {
             'criteria' => $criteria,
         ));
     }
+    
     public function behaviors()
     {
         return array(
@@ -136,21 +137,11 @@ class IncidenciaTiempo extends CActiveRecord {
             ),
         );
     }
-    
-//      public function behaviors() {
-//        return array(
-//            'CTimestampBehavior' => array(
-//                'class' => 'zii.behaviors.CTimestampBehavior',
-//                'createAttribute' => 'registrado_por',
-//                'updateAttribute' => 'modificado_por',
-//                'setUpdateOnCreate' => true,
-//            ),
-//            'BlameableBehavior' => array(
-//                'class' => 'application.components.behaviors.BlameableBehavior',
-//                'createdByColumn' => 'fecha_registro',
-//                'updatedByColumn' => 'fecha_modificado',
-//            ),
-//        );
-//    }
+
+    public function obtenerIncidenciaTiempoPorIdIncidencia($id_incidencia){
+        $criteria = new CDbCriteria;
+        $criteria->compare('id_incidencia', $id_incidencia);
+        return $criteria;
+    }
 
 }
