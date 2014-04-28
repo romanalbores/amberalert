@@ -1,7 +1,11 @@
 <?php
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id' => 'persona-form',
-    'enableAjaxValidation' => false,
+    'enableAjaxValidation' => true,
+    'clientOptions' => array(
+        'validateOnSubmit' => true, // Required to perform AJAX validation on form submit
+        'afterValidate' => 'js:mySubmitFormFunction', // Your JS function to submit form
+    ),
         ));
 ?>
 

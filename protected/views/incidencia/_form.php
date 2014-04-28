@@ -16,6 +16,7 @@
         xD
     </li>
 </div>-->
+
 <?php
 $formIncidencia = $this->renderPartial('_formIncidencia', array('model' => $model, 'modelIncidenciaTiempo' => $modelIncidenciaTiempo), true, false);
 $formIncidenciaTiempo = $this->renderPartial('_formIncidenciaTiempo', array('model' => $modelIncidenciaTiempo), true, false);
@@ -25,9 +26,10 @@ $formVehiculoSospechoso = $this->renderPartial('_formPersonaCaracteristicaVehicu
 
 
 $this->widget(
-        'bootstrap.widgets.TbWizard', array(
+    'bootstrap.widgets.TbWizard', array(
     'type' => 'tabs', // 'tabs' or 'pills'
     'placement' => 'left',
+    'id'=>'wizard-incidencias',
 //    'pagerContent' => '',
     'options' => array(
 //        'nextSelector' => '#btn_next',
@@ -35,13 +37,27 @@ $this->widget(
 //        'firstSelector' => '.button-first',
 //        'lastSelector' => '.button-last',
         'onTabShow' => 'js:function(tab, navigation, index) {
-            
-var $total = navigation.find("li").length;
-var $current = index+1;
-var $percent = ($current/$total) * 100;
-$("#wizard-bar > .bar").css({width:$percent+"%"});
-}',
-        'onTabClick' => 'js:function(tab, navigation, index) {alert("Tab Click Disabled");return false;}',
+            console.log("TAB SHOW");
+            current_step = index;
+            console.log(index);
+            actualizaProgress(tab, navigation, index);
+        }',
+        'onTabClick' => 'js:function(tab, navigation, index) {
+            console.log("TAB CLICK");
+            console.log(tab)
+            console.log(navigation);
+            console.log(index);
+        }',
+        'onNext' => 'js:function(tab, navigation, index) {
+            console.log("BTN NEXT");            
+            var res = validaPaso(tab, navigation, index);     
+            return res;
+        }',
+        'onPrevious' => 'js:function(tab, navigation, index) {
+            console.log("BTN PREV");
+            var res = validaPaso(tab, navigation, index);     
+            return res;
+        }'
     ),
     'tabs' => array(
         array(
@@ -57,3 +73,9 @@ $("#wizard-bar > .bar").css({width:$percent+"%"});
         )
 );
 ?>
+
+<script type="text/javascript">    
+    $( document ).ready(function() {
+        seleccionarPasoSiguiente(<?php echo $returnStep; ?>);
+    });    
+</script>
