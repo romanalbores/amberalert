@@ -152,29 +152,37 @@ class PosteDireccion extends CActiveRecord {
     public function getById($id) {
         $criteria = new CDbCriteria;
         $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
-        return $criteria;
+        return $this->findAll($criteria);
+    }
+    
+     public function getByIdPosteDireccion($id_poste, $id_direccion) {
+        $criteria = new CDbCriteria;
+        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_poste=" . $id_poste." AND id_direccion= ".$id_direccion;
+        return $this->findAll($criteria);
     }
     
     public function getByIdPoste($id_poste) {
         $criteria = new CDbCriteria;
         $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_poste=" . $id_poste;
-        return $criteria;
+        return $this->find($criteria);
     }
+    
     public function getByIdDireccion($id_direccion) {
         $criteria = new CDbCriteria;
         $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_direccion=" . $id_direccion;
-        return $criteria;
+        return $this->find($criteria);
     }
+    
     public function getByIdZona($id_zona) {
         $criteria = new CDbCriteria;
         $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_zona=" . $id_zona;
-        return $criteria;
+        return $this->findAll($criteria);
     }
 
     public function getByIP($dir_ip) {
         $criteria = new CDbCriteria;
         $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND dir_ip = " . $dir_ip;
-        return $criteria;
+        return $this->findAll($criteria);
     }
     
 }

@@ -148,7 +148,7 @@ public function obtenerListaVehiculo() {
 
         public function getByIdOficina($id_oficina) {
         $criteria = new CDbCriteria;
-        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_vehiculo=" . $id_oficina;
+        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_oficina=" . $id_oficina;
         return $criteria;
     }
 }
