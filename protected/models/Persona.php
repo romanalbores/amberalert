@@ -49,7 +49,7 @@ class Persona extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('registrado_por, fecha_registro, modificado_por, fecha_modificado', 'required'),
+            array('nombre, registrado_por, fecha_registro, modificado_por, fecha_modificado', 'required'),
             array('registrado_por, modificado_por, eliminado', 'numerical', 'integerOnly' => true),
             array('nombre', 'length', 'max' => 200),
             array('apellido_paterno, genero, estatus', 'length', 'max' => 15),
@@ -152,6 +152,25 @@ class Persona extends CActiveRecord {
         $criteria = new CDbCriteria;
         $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
         return $criteria;
+    }
+    
+    public function obtenerPersonaPorIdIncidencia($id_incidencia){
+        $criteria = new CDbCriteria;
+        $criteria->alias = "data_persona";
+        $criteria->select = "data_persona.*";
+        $criteria->join = "INNER JOIN data_relacion_victima_sospechoso on data_relacion_victima_sospechoso.id_persona_victima = data_persona.id";
+        $criteria->condition = "data_relacion_victima_sospechoso.id_incidencia = ".$id_incidencia;
+        return $this->find($criteria);
+    }
+    
+    public function obtenerPersonaSospechosoPorIdIncidencia($id_incidencia){
+        $id_incidencia = $id_incidencia != "" ? $id_incidencia : 0;
+        $criteria = new CDbCriteria;
+        $criteria->alias = "data_persona";
+        $criteria->select = "data_persona.*";
+        $criteria->join = "INNER JOIN data_relacion_victima_sospechoso on data_relacion_victima_sospechoso.id_persona_sospechoso = data_persona.id";
+        $criteria->condition = "data_relacion_victima_sospechoso.id_incidencia = ".$id_incidencia;
+        return $this->find($criteria);
     }
 
 }

@@ -140,8 +140,8 @@ class PersonaVestimenta extends CActiveRecord {
             ),
         );
     }
-    
-        public function obtenerListaPersonaVestimenta() {
+
+    public function obtenerListaPersonaVestimenta() {
         $criteria = new CDbCriteria();
         $criteria->compare('estatus', 'ACTIVO');
         $criteria->compare('eliminado', 0);
@@ -154,9 +154,15 @@ class PersonaVestimenta extends CActiveRecord {
         return $criteria;
     }
 
-     public function getByIdPersona($id_persona) {
+    public function getByIdPersona($id_persona) {
         $criteria = new CDbCriteria;
         $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_persona=" . $id_persona;
+        return $criteria;
+    }
+
+    public function getByIdPersonaCaracteristica($id_persona_caracteristica) {
+        $criteria = new CDbCriteria;
+        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_persona_caracteristica=" . $id_persona_caracteristica;
         return $criteria;
     }
 

@@ -29,6 +29,9 @@ Este es un comentario de prueba para el commit para ver que se haya hecho la mod
                 'modelPersonaMenor' => $modelPersonaMenor,
                 'modelPersonaMenorCaracteristica' => $modelPersonaMenorCaracteristica,
                 'modelPersonaMenorVestimenta' => $modelPersonaMenorVestimenta,
+                'modelPersonaSospechoso' => $modelPersonaSospechoso,
+                'modelPersonaSospechosoCaracteristica' => $modelPersonaSospechosoCaracteristica,
+                'modelPersonaSospechosoVestimenta' => $modelPersonaSospechosoVestimenta,
                 'returnStep' => $returnStep
             )
         ); 

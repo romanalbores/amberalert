@@ -204,6 +204,7 @@ class PersonaCaracteristica extends CActiveRecord {
     }
 
     public function getByIdPersona($id_persona) {
+        $id_persona = $id_persona != "" ? $id_persona : 0;        
         $criteria = new CDbCriteria;
         $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_persona=" . $id_persona;
         return $criteria;

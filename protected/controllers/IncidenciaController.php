@@ -67,20 +67,68 @@ class IncidenciaController extends Controller {
             $modelIncidenciaTiempo->id_incidencia = $model->id; 
         }
         
-        $modelPersonaMenor = new Persona();
-        $modelPersonaMenorCaracteristica = new PersonaCaracteristica();
-        $modelPersonaMenorVestimenta = new PersonaVestimenta();
+        /**
+         * Seccion de persona menor
+         */
+        $model_id = $model->id >0 ? $model->id : 0;
+        $modelPersonaMenorFound = Persona::model()->obtenerPersonaPorIdIncidencia($model_id);
+        $modelPersonaMenor = $modelPersonaMenorFound != null ? $modelPersonaMenorFound : new Persona;
+        $modelPersonaMenorCaracteristicaFound = PersonaCaracteristica::model()->find(PersonaCaracteristica::model()->getByIdPersona($modelPersonaMenor->id));
+        $modelPersonaMenorCaracteristica = $modelPersonaMenorCaracteristicaFound != null ? $modelPersonaMenorCaracteristicaFound : new PersonaCaracteristica();
+        if($model->id > 0){            
+            $modelPersonaMenorCaracteristica->id_incidencia = $model->id;
+        }
+        if($modelPersonaMenor->id > 0){            
+            $modelPersonaMenorCaracteristica->id_persona = $modelPersonaMenor->id;                                
+        }
+        $id_caracteristica_menor = $modelPersonaMenorCaracteristica->id >0 ? $modelPersonaMenorCaracteristica->id : 0;
+        $modelPersonaMenorVestimentaFound = PersonaVestimenta::model()->find(PersonaVestimenta::model()->getByIdPersonaCaracteristica($id_caracteristica_menor));
+        $modelPersonaMenorVestimenta = $modelPersonaMenorVestimentaFound != null ? $modelPersonaMenorVestimentaFound : new PersonaVestimenta();
+        if($modelPersonaMenorCaracteristica->id > 0){
+            $modelPersonaMenorVestimenta->id_persona_caracteristica = $modelPersonaMenorCaracteristica->id;                                
+        }
+        
+        /**
+         * Seccion de persona sospechosa
+         */
+        $modelPersonaSospechosoFound = Persona::model()->obtenerPersonaSospechosoPorIdIncidencia($model->id);
+        $modelPersonaSospechoso = $modelPersonaSospechosoFound != null ? $modelPersonaSospechosoFound : new Persona;
+        $modelPersonaSospechosoCaracteristicaFound = PersonaCaracteristica::model()->find(PersonaCaracteristica::model()->getByIdPersona($modelPersonaSospechoso->id));
+        $modelPersonaSospechosoCaracteristica = $modelPersonaSospechosoCaracteristicaFound != null ? $modelPersonaSospechosoCaracteristicaFound : new PersonaCaracteristica();
+        if($model->id > 0){            
+            $modelPersonaSospechosoCaracteristica->id_incidencia = $model->id;
+        }
+        if($modelPersonaSospechoso->id > 0){            
+            $modelPersonaSospechosoCaracteristica->id_persona = $modelPersonaSospechoso->id;                                
+        }
+        $id_caracteristica_sospechoso = $modelPersonaSospechosoCaracteristica->id >0 ? $modelPersonaSospechosoCaracteristica->id : 0;
+        $modelPersonaSospechosoVestimentaFound = PersonaVestimenta::model()->find(PersonaVestimenta::model()->getByIdPersonaCaracteristica($id_caracteristica_sospechoso));
+        $modelPersonaSospechosoVestimenta = $modelPersonaSospechosoVestimentaFound != null ? $modelPersonaSospechosoVestimentaFound : new PersonaVestimenta();
+        if($modelPersonaSospechosoCaracteristica->id > 0){
+            $modelPersonaSospechosoVestimenta->id_persona_caracteristica = $modelPersonaSospechosoCaracteristica->id;                                
+        }
+        
         $returnStep = isset($_GET['next_step']) ? $_GET['next_step'] : -1;
 
 // Uncomment the following line if AJAX validation is needed
         $this->performAjaxValidation($model);
         $this->performAjaxValidationIncidenciaTiempo($modelIncidenciaTiempo);
-        $this->performAjaxValidationPersonaMenor($modelPersonaMenor);
+        $this->performAjaxValidationPersonaMenor(
+                $modelPersonaMenor, 
+                $modelPersonaMenorCaracteristica, 
+                $modelPersonaMenorVestimenta);
 
         // Insercion y actualizacion de incidencia tiempo
         $this->fn_performAjaxValidationIncidenciatiempo($modelIncidenciaTiempo);
-        // Insercion y actualizacion de persona menor
-        $this->fn_performAjaxValidationPersonaMenor($model->id);
+        if (isset($_POST['Persona']['tipo_persona']) && $_POST['Persona']['tipo_persona'] =="VICTIMA") {
+            // Insercion y actualizacion de persona menor
+            $this->fn_performAjaxValidationPersonaMenor($model->id,$modelPersonaMenor,$modelPersonaMenorCaracteristica,$modelPersonaMenorVestimenta);
+        }
+        
+        if (isset($_POST['Persona']['tipo_persona']) && $_POST['Persona']['tipo_persona'] =="SOSPECHOSO") {
+            // Insercion y actualizacino de persona sospechosa
+            $this->fn_performAjaxValidationPersonaSospechoso($model->id, $modelPersonaMenor->id, $modelPersonaSospechoso,$modelPersonaSospechosoCaracteristica,$modelPersonaSospechosoVestimenta);
+        }
 
         if (isset($_POST['Incidencia'])) {
             $model->attributes = $_POST['Incidencia'];
@@ -100,9 +148,12 @@ class IncidenciaController extends Controller {
         $this->render('create', array(
             'model' => $model,
             'modelIncidenciaTiempo' => $modelIncidenciaTiempo,
-            'modelPersonaMenor' => $modelPersonaMenor,
+            'modelPersonaMenor' => $modelPersonaMenor,            
             'modelPersonaMenorCaracteristica' => $modelPersonaMenorCaracteristica,
             'modelPersonaMenorVestimenta' => $modelPersonaMenorVestimenta,
+            'modelPersonaSospechoso' => $modelPersonaSospechoso,
+            'modelPersonaSospechosoCaracteristica' => $modelPersonaSospechosoCaracteristica,
+            'modelPersonaSospechosoVestimenta' => $modelPersonaSospechosoVestimenta,
             'returnStep' => $returnStep
         ));
     }
@@ -122,18 +173,105 @@ class IncidenciaController extends Controller {
         }        
     }
 
-    private function fn_performAjaxValidationPersonaMenor($id_incidencia) {                
+    private function fn_performAjaxValidationPersonaMenor(
+            $id_incidencia, 
+            $modelPersonaMenor,
+            $modelPersonaMenorCaracteristica, 
+            $modelPersonaMenorVestimenta
+        ) {
+            
+            $returnStep = isset($_POST['next_step']) ? $_POST['next_step'] : -1;
+            $returnUrl = Yii::app()->createUrl('Incidencia/Create',array('id'=>$id_incidencia,'next_step'=>$returnStep));
             if (isset($_POST['Persona'])) {
-                //$modelIncidenciaTiempo->attributes = $_POST['Persona'];      
-                //$modelIncidenciaTiempo->registrado_por = 1;
-                //$modelIncidenciaTiempo->modificado_por = 1;      
-                //$saved = $modelIncidenciaTiempo->save();
-                //if($saved){
-                    $returnStep = isset($_POST['next_step']) ? $_POST['next_step'] : -1;
-                    $returnUrl = Yii::app()->createUrl('Incidencia/Create',array('id'=>$id_incidencia,'next_step'=>$returnStep));
-                    echo CJSON::encode(array('result'=>true,'data'=>$returnUrl));
-                    Yii::app()->end();
-                //}            
+                $modelPersonaMenor->attributes = $_POST['Persona'];      
+                $modelPersonaMenor->registrado_por = 1;
+                $modelPersonaMenor->modificado_por = 1;      
+                $saved = $modelPersonaMenor->save();
+                if($saved){
+                    
+                    $modelRelacionVictimaSospechosoFound = RelacionVictimaSospechoso::model()->find(RelacionVictimaSospechoso::model()->getByIdPersonaVictima($modelPersonaMenor->id));
+                    $modelRelacionVictimaSospechoso = $modelRelacionVictimaSospechosoFound != null ? $modelRelacionVictimaSospechosoFound : new RelacionVictimaSospechoso();
+                    $modelRelacionVictimaSospechoso->id_persona_victima = $modelPersonaMenor->id;
+                    $modelRelacionVictimaSospechoso->id_incidencia = $id_incidencia;
+//                    $modelRelacionVictimaSospechoso->id_tipo_relacion  =1;
+                    $guardo = $modelRelacionVictimaSospechoso->save();                    
+                    $errores = $modelRelacionVictimaSospechoso->getErrors();                    
+                    $saved = $this->fn_performAjaxValidationPersonaMenorCaracteristica($modelPersonaMenor->id, $modelPersonaMenorCaracteristica);
+                    if($saved){                        
+                        $saved = $this->fn_performAjaxValidationPersonaMenorVestimenta($modelPersonaMenorCaracteristica->id, $modelPersonaMenorVestimenta);
+//                        $saved = true;
+                        
+                        if($saved){                            
+                            echo CJSON::encode(array('result'=>true,'data'=>$returnUrl));                        
+                        }
+                        else{
+                            echo CJSON::encode(array('result'=>false,'data'=>$returnUrl));
+                        }
+                        Yii::app()->end();
+                    }
+                }            
+            }        
+        }
+        
+    private function fn_performAjaxValidationPersonaSospechoso(
+            $id_incidencia, 
+            $id_victima,
+            $modelPersonaMenor,
+            $modelPersonaMenorCaracteristica, 
+            $modelPersonaMenorVestimenta
+        ) {
+            
+            $returnStep = isset($_POST['next_step']) ? $_POST['next_step'] : -1;
+            $returnUrl = Yii::app()->createUrl('Incidencia/Create',array('id'=>$id_incidencia,'next_step'=>$returnStep));
+            if (isset($_POST['Persona'])) {
+                $modelPersonaMenor->attributes = $_POST['Persona'];      
+                $modelPersonaMenor->registrado_por = 1;
+                $modelPersonaMenor->modificado_por = 1;      
+                $saved = $modelPersonaMenor->save();
+                if($saved){
+                    
+                    $modelRelacionVictimaSospechosoFound = RelacionVictimaSospechoso::model()->find(RelacionVictimaSospechoso::model()->getByIdPersonaVictima($id_victima));
+                    $modelRelacionVictimaSospechoso = $modelRelacionVictimaSospechosoFound != null ? $modelRelacionVictimaSospechosoFound : new RelacionVictimaSospechoso();
+                    $modelRelacionVictimaSospechoso->id_persona_sospechoso = $modelPersonaMenor->id;
+                    $modelRelacionVictimaSospechoso->id_incidencia = $id_incidencia;
+//                    $modelRelacionVictimaSospechoso->id_tipo_relacion  =1;
+                    $guardo = $modelRelacionVictimaSospechoso->save();                    
+                    $errores = $modelRelacionVictimaSospechoso->getErrors();                    
+                    $saved = $this->fn_performAjaxValidationPersonaMenorCaracteristica($modelPersonaMenor->id, $modelPersonaMenorCaracteristica);
+                    if($saved){                        
+                        $saved = $this->fn_performAjaxValidationPersonaMenorVestimenta($modelPersonaMenorCaracteristica->id, $modelPersonaMenorVestimenta);
+//                        $saved = true;
+                        
+                        if($saved){                            
+                            echo CJSON::encode(array('result'=>true,'data'=>$returnUrl));                        
+                        }
+                        else{
+                            echo CJSON::encode(array('result'=>false,'data'=>$returnUrl));
+                        }
+                        Yii::app()->end();
+                    }
+                }            
+            }        
+        }
+        
+    private function fn_performAjaxValidationPersonaMenorCaracteristica($id_persona, $modelPersonaMenorCaracteristica) {
+            if (isset($_POST['PersonaCaracteristica'])) {
+                $modelPersonaMenorCaracteristica->attributes = $_POST['PersonaCaracteristica'];      
+                $modelPersonaMenorCaracteristica->id_persona = $id_persona;
+                $modelPersonaMenorCaracteristica->registrado_por = 1;
+                $modelPersonaMenorCaracteristica->modificado_por = 1;      
+                $saved = $modelPersonaMenorCaracteristica->save();
+                return $saved;
+            }        
+        }
+    private function fn_performAjaxValidationPersonaMenorVestimenta($id_persona_caracteristica, $modelPersonaMenorVestimenta) {
+            if (isset($_POST['PersonaVestimenta'])) {
+                $modelPersonaMenorVestimenta->attributes = $_POST['PersonaVestimenta'];      
+                $modelPersonaMenorVestimenta->id_persona_caracteristica = $id_persona_caracteristica;
+                $modelPersonaMenorVestimenta->registrado_por = 1;
+                $modelPersonaMenorVestimenta->modificado_por = 1;      
+                $saved = $modelPersonaMenorVestimenta->save();
+                return $saved;
             }        
         }
 
@@ -236,9 +374,19 @@ class IncidenciaController extends Controller {
      * Performs the AJAX validation.
      * @param CModel the model to be validated
      */
-    protected function performAjaxValidationPersonaMenor($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'persona-form') {
-            echo CActiveForm::validate($model);
+    protected function performAjaxValidationPersonaMenor(
+            $modelPersonaMenor, 
+            $modelPersonaMenorCaracteristica, 
+            $modelPersonaMenorVestimenta) 
+    {
+        if (isset($_POST['ajax']) && ($_POST['ajax'] === 'persona-sospechoso-form' || $_POST['ajax']== 'persona-menor-form')) {
+            echo CActiveForm::validate(
+                    array(
+                        $modelPersonaMenor,
+                        $modelPersonaMenorCaracteristica,
+                        $modelPersonaMenorVestimenta
+                    )
+                );
             Yii::app()->end();
         }        
     }

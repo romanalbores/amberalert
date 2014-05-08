@@ -1,6 +1,6 @@
 <?php
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
-    'id' => 'persona-menor-form',
+    'id' => 'persona-sospechoso-form',
     'enableAjaxValidation' => true,
     'clientOptions' => array(
         'validateOnSubmit' => true, // Required to perform AJAX validation on form submit
@@ -14,9 +14,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 <?php echo $form->errorSummary($model); ?>
 <?php echo $form->errorSummary($modelPersonaMenorCaracteristica); ?>
 <?php echo $form->errorSummary($modelPersonaMenorVestimenta); ?>
-
-<input type="hidden" name="Persona[tipo_persona]" value="VICTIMA" />
-<?php echo $form->hiddenField($model, 'id', array('class' => 'span5', 'maxlength' => 200)); ?>
+<input type="hidden" name="Persona[tipo_persona]" value="SOSPECHOSO" />
 <?php echo $form->textFieldRow($model, 'nombre', array('class' => 'span5', 'maxlength' => 200)); ?>
 
 <?php echo $form->textFieldRow($model, 'apellido_paterno', array('class' => 'span5', 'maxlength' => 15)); ?>
@@ -30,16 +28,15 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 
 <!-- VESTIMENTA -->
-<?php echo $form->hiddenField($modelPersonaMenorVestimenta, 'id', array('class' => 'span5')); ?>
 <?php echo $form->hiddenField($modelPersonaMenorVestimenta, 'id_persona_caracteristica', array('class' => 'span5')); ?>
-<div class="accordion" id="accordion2">
+<div class="accordion" id="accordion2_sospechoso">
     <div class="accordion-group">
         <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2_sospechoso" href="#collapseOne_sospechoso">
                 Caracter&iacute;sticas
             </a>
         </div>
-        <div id="collapseOne" class="accordion-body collapse">
+        <div id="collapseOne_sospechoso" class="accordion-body collapse">
             <div class="accordion-inner">
                 <!--CARACTERISTICAS-->
 
@@ -88,11 +85,11 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     </div>
     <div class="accordion-group">
         <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2_sospechoso" href="#collapseTwo_sospechoso">
                 Ropa
             </a>
         </div>
-        <div id="collapseTwo" class="accordion-body collapse">
+        <div id="collapseTwo_sospechoso" class="accordion-body collapse">
             <div class="accordion-inner">
                 <?php echo $form->hiddenField($modelPersonaMenorVestimenta, 'id_persona_caracteristica', array('class' => 'span5', 'maxlength' => 100)); ?>
                 

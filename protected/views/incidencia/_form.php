@@ -21,7 +21,7 @@
 $formIncidencia = $this->renderPartial('_formIncidencia', array('model' => $model, 'modelIncidenciaTiempo' => $modelIncidenciaTiempo), true, false);
 $formIncidenciaTiempo = $this->renderPartial('_formIncidenciaTiempo', array('model' => $modelIncidenciaTiempo), true, false);
 $formPersonaMenor = $this->renderPartial('_formPersona', array('model' => $modelPersonaMenor, 'modelPersonaMenorCaracteristica'=>$modelPersonaMenorCaracteristica,'modelPersonaMenorVestimenta'=>$modelPersonaMenorVestimenta), true, false);
-$formPersonaMenorCaracteristica = $this->renderPartial('_formPersona', array('model' => $modelPersonaMenor, 'modelPersonaMenorCaracteristica'=>$modelPersonaMenorCaracteristica,'modelPersonaMenorVestimenta'=>$modelPersonaMenorVestimenta), true, false);
+$formPersonaMenorCaracteristica = $this->renderPartial('_formPersonaSospechoso', array('model' => $modelPersonaSospechoso, 'modelPersonaMenorCaracteristica'=>$modelPersonaSospechosoCaracteristica,'modelPersonaMenorVestimenta'=>$modelPersonaSospechosoVestimenta), true, false);
 $formVehiculoSospechoso = $this->renderPartial('_formPersonaCaracteristicaVehiculoSospechoso', array('model' => new PersonaCaracteristicaVehiculo()), true, false);
 
 
