@@ -50,7 +50,7 @@ class RelacionVictimaSospechoso extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('id_persona_victima, registrado_por, fecha_registro, modificado_por, fecha_modificado', 'required'),
+            array('id_persona_victima', 'required'),
             array('id_persona_victima, id_persona_sospechoso, id_tipo_relacion, presuncion_patria_protestad, disputa_patria_protestad, intento_previo_sustraccion, registrado_por, modificado_por, eliminado', 'numerical', 'integerOnly' => true),
             array('estatus', 'length', 'max' => 15),
             array('fecha_avistamiento, fecha_intento, descripcion', 'safe'),
@@ -158,24 +158,22 @@ class RelacionVictimaSospechoso extends CActiveRecord {
         return $criteria;
     }
 
-        public function getByIdPersonaVictima($id_persona_victima) {
+    public function getByIdPersonaVictima($id_persona_victima) {
         $criteria = new CDbCriteria;
         $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_persona_victima=" . $id_persona_victima;
         return $criteria;
     }
 
-    
-        public function getByIdPersonaSospechoso($id_persona_sospechoso) {
+    public function getByIdPersonaSospechoso($id_persona_sospechoso) {
         $criteria = new CDbCriteria;
         $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_persona_sospechoso=" . $id_persona_sospechoso;
         return $criteria;
     }
 
-        public function getByIdTipoRelacion($id_tipo_relacion) {
+    public function getByIdTipoRelacion($id_tipo_relacion) {
         $criteria = new CDbCriteria;
         $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_tipo_relacion=" . $id_tipo_relacion;
         return $criteria;
     }
 
-    
 }
