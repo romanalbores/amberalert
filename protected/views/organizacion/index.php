@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Organizacions',
+	'Organizaciones',
 );
 
 $this->menu=array(
-array('label'=>'Create Organizacion','url'=>array('create')),
-array('label'=>'Manage Organizacion','url'=>array('admin')),
+array('label'=>'Nuevo','url'=>array('create')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>Organizacions</h1>
+<h1>Organizaciones</h1>
 
 <?php $this->widget('bootstrap.widgets.TbListView',array(
 'dataProvider'=>$dataProvider,

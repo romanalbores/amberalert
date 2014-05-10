@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Organizacions'=>array('index'),
-	'Create',
+	'Organizaciones'=>array('index'),
+	'Nuevo',
 );
 
 $this->menu=array(
-array('label'=>'List Organizacion','url'=>array('index')),
-array('label'=>'Manage Organizacion','url'=>array('admin')),
+array('label'=>'Listar','url'=>array('index')),
+array('label'=>'Administrar','url'=>array('admin')),
 );
 ?>
 
-<h1>Create Organizacion</h1>
+<h1>Nueva Organización</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

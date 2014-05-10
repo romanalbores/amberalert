@@ -74,11 +74,11 @@ class Zona extends CActiveRecord {
      */
     public function attributeLabels() {
         return array(
-            'id' => 'ID',
-            'id_oficina' => 'Id Oficina',
-            'nombre' => 'Nombre',
-            'nombre_corto' => 'Nombre Corto',
-            'codigo' => 'Codigo',
+            'id' => 'Zona',
+            'id_oficina' => 'Oficina',
+            'nombre' => 'Nombre Zona',
+            'nombre_corto' => 'Nombre Corto Zona',
+            'codigo' => 'Código',
             'descripcion' => 'Descripcion',
             'estatus' => 'Estatus',
             'registrado_por' => 'Registrado Por',
@@ -133,7 +133,8 @@ class Zona extends CActiveRecord {
             ),
         );
     }
-public function obtenerListaVehiculo() {
+
+    public function obtenerListaZona() {
         $criteria = new CDbCriteria();
         $criteria->compare('estatus', 'ACTIVO');
         $criteria->compare('eliminado', 0);
@@ -142,13 +143,18 @@ public function obtenerListaVehiculo() {
 
     public function getById($id) {
         $criteria = new CDbCriteria;
-        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
-        return $criteria;
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        $criteria->compare('id', $id);
+        return $this->findAll($criteria);
     }
 
-        public function getByIdOficina($id_oficina) {
+    public function getByIdOficina($id_oficina) {
         $criteria = new CDbCriteria;
-        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_oficina=" . $id_oficina;
-        return $criteria;
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        $criteria->compare('id_oficina', $id_oficina);
+        return $this->findAll($criteria);
     }
+
 }

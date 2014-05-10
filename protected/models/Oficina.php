@@ -49,7 +49,7 @@ class Oficina extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('id_organizacion, id_region, nombre, registrado_por, fecha_registro, modificado_por, fecha_modificado', 'required'),
+            array('id_organizacion, id_region, nombre', 'required'),
             array('id_organizacion, id_region, registrado_por, modificado_por, eliminado', 'numerical', 'integerOnly' => true),
             array('nombre', 'length', 'max' => 500),
             array('nombre_corto', 'length', 'max' => 25),
@@ -69,8 +69,8 @@ class Oficina extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'idOrganizacion' => array(self::BELONGS_TO, 'CataOrganizacion', 'id_organizacion'),
-            'idRegion' => array(self::BELONGS_TO, 'CataRegion', 'id_region'),
+            'idOrganizacion' => array(self::BELONGS_TO, 'Organizacion', 'id_organizacion'),
+            'idRegion' => array(self::BELONGS_TO, 'Region', 'id_region'),
             'oficinaDepartamentos' => array(self::HAS_MANY, 'OficinaDepartamento', 'id_oficina'),
             'oficinaDireccions' => array(self::HAS_MANY, 'OficinaDireccion', 'id_oficina'),
         );
@@ -82,9 +82,9 @@ class Oficina extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'id_organizacion' => 'Id Organizacion',
-            'id_region' => 'Id Region',
-            'nombre' => 'Nombre',
+            'id_organizacion' => 'Organizacion',
+            'id_region' => 'Region',
+            'nombre' => 'Nombre Oficina',
             'nombre_corto' => 'Nombre Corto',
             'codigo' => 'Codigo',
             'descripcion' => 'Descripcion',
@@ -106,9 +106,12 @@ class Oficina extends CActiveRecord {
         // should not be searched.
 
         $criteria = new CDbCriteria;
-        $criteria->compare('id', $this->id);
-        $criteria->compare('id_organizacion', $this->id_organizacion);
-        $criteria->compare('id_region', $this->id_region);
+        $criteria->alias="oficina";
+        $criteria->compare('id', $this->id);       
+        $criteria->with = array('idOrganizacion');
+        $criteria->addSearchCondition('LOWER(idOrganizacion.nombre)', strtolower($this->id_organizacion));
+        $criteria->with = array('idRegion');
+        $criteria->addSearchCondition('LOWER(idRegion.nombre)', strtolower($this->id_region));
         $criteria->compare('nombre', $this->nombre, true);
         $criteria->compare('nombre_corto', $this->nombre_corto, true);
         $criteria->compare('codigo', $this->codigo, true);
@@ -119,10 +122,15 @@ class Oficina extends CActiveRecord {
         $criteria->compare('modificado_por', $this->modificado_por);
         $criteria->compare('fecha_modificado', $this->fecha_modificado, true);
         $criteria->compare('eliminado', $this->eliminado);
-        $criteria->compare('estatus', 'ACTIVO');
-        $criteria->compare('eliminado', 0);
+        $criteria->compare('oficina.estatus', 'ACTIVO');
+        $criteria->compare('oficina.eliminado', 0);      
+         $criteria->compare('idOrganizacion.nombre', $this->id_organizacion, true);
+         $criteria->compare('idRegion.nombre', $this->id_region, true);
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
+            'pagination' => array(
+                'pageSize' => 50,
+            ),
         ));
     }
 
@@ -151,20 +159,26 @@ class Oficina extends CActiveRecord {
 
     public function getById($id) {
         $criteria = new CDbCriteria;
-        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
-        return $criteria;
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        $criteria->compare('id', $id);
+        return $this->findAll($criteria);
     }
 
     public function getByIdRegion($id_region) {
         $criteria = new CDbCriteria;
-        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_region=" . $id_region;
-        return $criteria;
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        $criteria->compare('id_region', $id_region);
+        return $this->findAll($criteria);
     }
 
     public function getByIdOrganizacion($id_organizacion) {
         $criteria = new CDbCriteria;
-        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id_organizacion;
-        return $criteria;
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        $criteria->compare('id_region', $id_organizacion);
+        return $this->findAll($criteria);
     }
 
 }

@@ -6,10 +6,10 @@ $this->breadcrumbs=array(
 );
 
 	$this->menu=array(
-	array('label'=>'List Organizacion','url'=>array('index')),
-	array('label'=>'Create Organizacion','url'=>array('create')),
-	array('label'=>'View Organizacion','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage Organizacion','url'=>array('admin')),
+	array('label'=>'Listar','url'=>array('index')),
+	array('label'=>'Nuevo','url'=>array('create')),
+	array('label'=>'Ver','url'=>array('view','id'=>$model->id)),
+	array('label'=>'Administrar','url'=>array('admin')),
 	);
 	?>
 

@@ -61,6 +61,8 @@ class OrganizacionController extends Controller {
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
+        $model->registrado_por = 1;
+        $model->modificado_por = 1;
 
         if (isset($_POST['Organizacion'])) {
             $model->attributes = $_POST['Organizacion'];
@@ -101,7 +103,6 @@ class OrganizacionController extends Controller {
      * @param integer $id the ID of the model to be deleted
      */
     public function actionDelete($id) {
-
         $model = $this->loadModel($id);
         $model->estatus = 'ELIMINADO';
         $model->eliminado = 1;

@@ -136,8 +136,11 @@ class Organizacion extends CActiveRecord {
 
     public function getById($id) {
         $criteria = new CDbCriteria;
-        $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
-        return $criteria;
+       // $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        $criteria->compare('id', $id);        
+        return $this->findAll($criteria);
     }
  
     
