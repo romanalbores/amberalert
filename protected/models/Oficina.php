@@ -31,6 +31,9 @@ class Oficina extends CActiveRecord {
      * @param string $className active record class name.
      * @return Oficina the static model class
      */
+    public $organizacion_nombre;
+    public $region_nombre;
+
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
@@ -58,7 +61,7 @@ class Oficina extends CActiveRecord {
             array('descripcion', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, id_organizacion, id_region, nombre, nombre_corto, codigo, descripcion, estatus, registrado_por, fecha_registro, modificado_por, fecha_modificado, eliminado', 'safe', 'on' => 'search'),
+            array('id, id_organizacion, organizacion_nombre, id_region, region_nombre, nombre, nombre_corto, codigo, descripcion, estatus, registrado_por, fecha_registro, modificado_por, fecha_modificado, eliminado', 'safe', 'on' => 'search'),
         );
     }
 
@@ -106,8 +109,8 @@ class Oficina extends CActiveRecord {
         // should not be searched.
 
         $criteria = new CDbCriteria;
-        $criteria->alias="oficina";
-        $criteria->compare('id', $this->id);       
+        $criteria->alias = "oficina";
+        $criteria->compare('id', $this->id);
         $criteria->with = array('idOrganizacion');
         $criteria->addSearchCondition('LOWER(idOrganizacion.nombre)', strtolower($this->id_organizacion));
         $criteria->with = array('idRegion');
@@ -123,15 +126,16 @@ class Oficina extends CActiveRecord {
         $criteria->compare('fecha_modificado', $this->fecha_modificado, true);
         $criteria->compare('eliminado', $this->eliminado);
         $criteria->compare('oficina.estatus', 'ACTIVO');
-        $criteria->compare('oficina.eliminado', 0);      
-         $criteria->compare('idOrganizacion.nombre', $this->id_organizacion, true);
-         $criteria->compare('idRegion.nombre', $this->id_region, true);
-        return new CActiveDataProvider($this, array(
-            'criteria' => $criteria,
-            'pagination' => array(
-                'pageSize' => 50,
-            ),
-        ));
+        $criteria->compare('oficina.eliminado', 0);
+        $criteria->compare('idOrganizacion.nombre', '%' + $this->organizacion_nombre + '%', true, 'OR');
+        $criteria->compare('idRegion.nombre', '%' + $this->region_nombre + '%', true, 'OR');
+        return $this->findAll($criteria);
+//        return new CActiveDataProvider($this, array(
+//            'criteria' => $criteria,
+//            'pagination' => array(
+//                'pageSize' => 50,
+//            ),
+//        ));
     }
 
     public function behaviors() {
