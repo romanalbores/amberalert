@@ -1,102 +1,51 @@
-<?php
-/* @var $this ConfiguracionController */
-/* @var $model Configuracion */
-/* @var $form CActiveForm */
-?>
+<?php 
 
-<div class="form">
+Yii::app()->clientScript->registerScriptFile(
+        Yii::app()->request->baseUrl . "/js/incidencia.js", CClientScript::POS_END
+);
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+
+$form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'id'=>'configuracion-form',
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+<p class="help-block">Fields with <span class="required">*</span> are required.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'id_incidencia'); ?>
-		<?php echo $form->textField($model,'id_incidencia'); ?>
-		<?php echo $form->error($model,'id_incidencia'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'id_configuracion_dia',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'nombre'); ?>
-		<?php echo $form->textField($model,'nombre',array('size'=>60,'maxlength'=>500)); ?>
-		<?php echo $form->error($model,'nombre'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'nombre',array('class'=>'span5','maxlength'=>500)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'nombre_corto'); ?>
-		<?php echo $form->textField($model,'nombre_corto',array('size'=>25,'maxlength'=>25)); ?>
-		<?php echo $form->error($model,'nombre_corto'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'nombre_corto',array('class'=>'span5','maxlength'=>25)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'codigo'); ?>
-		<?php echo $form->textField($model,'codigo',array('size'=>12,'maxlength'=>12)); ?>
-		<?php echo $form->error($model,'codigo'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'codigo',array('class'=>'span5','maxlength'=>12)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'descripcion'); ?>
-		<?php echo $form->textArea($model,'descripcion',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'descripcion'); ?>
-	</div>
+	<?php echo $form->textAreaRow($model,'descripcion',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'fecha_inicio'); ?>
-		<?php echo $form->textField($model,'fecha_inicio'); ?>
-		<?php echo $form->error($model,'fecha_inicio'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'fecha_inicio',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'fecha_fin'); ?>
-		<?php echo $form->textField($model,'fecha_fin'); ?>
-		<?php echo $form->error($model,'fecha_fin'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'fecha_fin',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'estatus'); ?>
-		<?php echo $form->textField($model,'estatus',array('size'=>15,'maxlength'=>15)); ?>
-		<?php echo $form->error($model,'estatus'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'estatus',array('class'=>'span5','maxlength'=>15)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'fecha_registro'); ?>
-		<?php echo $form->textField($model,'fecha_registro'); ?>
-		<?php echo $form->error($model,'fecha_registro'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'fecha_registro',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'registrado_por'); ?>
-		<?php echo $form->textField($model,'registrado_por'); ?>
-		<?php echo $form->error($model,'registrado_por'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'registrado_por',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'modificado_por'); ?>
-		<?php echo $form->textField($model,'modificado_por'); ?>
-		<?php echo $form->error($model,'modificado_por'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'modificado_por',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'fecha_modificado'); ?>
-		<?php echo $form->textField($model,'fecha_modificado'); ?>
-		<?php echo $form->error($model,'fecha_modificado'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'fecha_modificado',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'eliminado'); ?>
-		<?php echo $form->textField($model,'eliminado'); ?>
-		<?php echo $form->error($model,'eliminado'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'eliminado',array('class'=>'span5')); ?>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
+<div class="form-actions">
+	<?php $this->widget('bootstrap.widgets.TbButton', array(
+			'buttonType'=>'submit',
+			'type'=>'primary',
+			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+		)); ?>
+</div>
 
 <?php $this->endWidget(); ?>
-
-</div><!-- form -->

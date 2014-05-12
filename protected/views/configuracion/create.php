@@ -1,15 +1,12 @@
 <?php
-/* @var $this ConfiguracionController */
-/* @var $model Configuracion */
-
 $this->breadcrumbs=array(
 	'Configuracions'=>array('index'),
 	'Create',
 );
 
 $this->menu=array(
-	array('label'=>'List Configuracion', 'url'=>array('index')),
-	array('label'=>'Manage Configuracion', 'url'=>array('admin')),
+array('label'=>'List Configuracion','url'=>array('index')),
+array('label'=>'Manage Configuracion','url'=>array('admin')),
 );
 ?>
 

@@ -139,7 +139,14 @@ class Dia extends CActiveRecord {
         return $criteria;
     }
 
-    public function obtenerListaDía() {
+    public function obtenerListaDia() {
+        $criteria = new CDbCriteria();
+        $criteria->compare('estatus', 'ACTIVO');
+        $criteria->compare('eliminado', 0);
+        return $this->findAll($criteria);
+    }
+
+    public function renderDivListaDia() {
         $criteria = new CDbCriteria();
         $criteria->compare('estatus', 'ACTIVO');
         $criteria->compare('eliminado', 0);

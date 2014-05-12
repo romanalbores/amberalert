@@ -62,7 +62,17 @@
                                             array('label' => 'Tipo Vehiculo', 'url' => array('/TipoVehiculo')),
                                             array('label' => 'Tipo de Poste', 'url' => array('/TipoPoste')),
                                         )),
-                                    array('label' => 'Días de la Semana', 'url' => array('/Dia')),
+                                //    array('label' => 'Configuración de Días', //'url' => array('/Dia')
+                                  array(
+                                        'label' => 'Configuración de Días',
+                                        'url' => array('/site/index'),
+                                        'linkOptions' => array('id' => 'menuDias'),
+                                        'itemOptions' => array('id' => 'itemDias'),
+                                        'items' => array(
+                                            array('label' => 'Días de la Semana', 'url' => array('/Dia')),
+                                            array('label' => 'Configuración de Dias', 'url' => array('/ConfiguracionDia')),                                           
+                                            array('label' => 'Configuración de Horas', 'url' => array('/ConfiguracionHora')),                                           
+                                        )),
                                     array('label' => 'Ubicación de Postes', 'url' => array('/Poste')),
                                 ), 'visible' => !Yii::app()->user->isGuest),
                             array(

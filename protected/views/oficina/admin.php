@@ -27,7 +27,7 @@ return false;
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
 'id'=>'oficina-grid',
-'dataProvider'=>$model->search(),
+'dataProvider'=>$model->searchAux(),
 'filter'=>$model,
 'columns'=>array(
 		'id',               
@@ -35,7 +35,7 @@ return false;
                 array( 'name'=>'organizacion_nombre', 'value'=>'$data->idRegion->nombre' ),
 		'nombre',
 		'nombre_corto',
-		'codigo',		 
+		'codigo',		 		
 array(
 'class'=>'bootstrap.widgets.TbButtonColumn',
 ),

@@ -86,7 +86,9 @@ class Oficina extends CActiveRecord {
         return array(
             'id' => 'ID',
             'id_organizacion' => 'Organizacion',
+            'organizacion_nombre' => 'Organizacion',
             'id_region' => 'Region',
+            'region_nombre' => 'Region',
             'nombre' => 'Nombre Oficina',
             'nombre_corto' => 'Nombre Corto',
             'codigo' => 'Codigo',
@@ -104,6 +106,25 @@ class Oficina extends CActiveRecord {
      * Retrieves a list of models based on the current search/filter conditions.
      * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
      */
+    public function searchAux() {
+        $criteria = new CDbCriteria;
+        $criteria->alias = "ofi";
+        $criteria->select = "ofi.id, ofi.id_organizacion, org.nombre as organizacion, ofi.id_region, reg.nombre as region , ofi.nombre, ofi.nombre_corto, ofi.codigo, ofi.descripcion, ofi.estatus, ofi.registrado_por, ofi.fecha_registro, ofi.modificado_por, ofi.fecha_modificado, ofi.eliminado";
+        $criteria->join = "LEFT OUTER JOIN cata_organizacion org ON ofi.id_organizacion=org.id LEFT OUTER JOIN cata_region reg ON ofi.id_region=reg.id ";         
+        $criteria->addSearchCondition('org.nombre', $this->organizacion_nombre,false,'OR');       
+        $criteria->addSearchCondition('reg.nombre', $this->region_nombre,false,'OR');        
+        $criteria->compare('ofi.nombre', $this->nombre, false,'OR');
+        $criteria->compare('ofi.nombre_corto', $this->nombre_corto, false,'OR');
+        $criteria->compare('ofi.codigo', $this->codigo, false,'OR');
+        $criteria->compare('ofi.estatus', 'ACTIVO');
+        $criteria->compare('ofi.eliminado', 0);      
+        $criteria->group = 'ofi.id';
+        $criteria->order="ofi.id desc";
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+        ));
+    }
+
     public function search() {
         // Warning: Please modify the following code to remove attributes that
         // should not be searched.

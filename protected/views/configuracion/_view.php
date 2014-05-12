@@ -1,16 +1,11 @@
-<?php
-/* @var $this ConfiguracionController */
-/* @var $data Configuracion */
-?>
-
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
+		<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
+	<?php echo CHtml::link(CHtml::encode($data->id),array('view','id'=>$data->id)); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id_incidencia')); ?>:</b>
-	<?php echo CHtml::encode($data->id_incidencia); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('id_configuracion_dia')); ?>:</b>
+	<?php echo CHtml::encode($data->id_configuracion_dia); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('nombre')); ?>:</b>

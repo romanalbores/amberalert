@@ -1,90 +1,42 @@
-<?php
-/* @var $this ConfiguracionController */
-/* @var $model Configuracion */
-/* @var $form CActiveForm */
-?>
-
-<div class="wide form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'id',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'id_incidencia'); ?>
-		<?php echo $form->textField($model,'id_incidencia'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'id_configuracion_dia',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'nombre'); ?>
-		<?php echo $form->textField($model,'nombre',array('size'=>60,'maxlength'=>500)); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'nombre',array('class'=>'span5','maxlength'=>500)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'nombre_corto'); ?>
-		<?php echo $form->textField($model,'nombre_corto',array('size'=>25,'maxlength'=>25)); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'nombre_corto',array('class'=>'span5','maxlength'=>25)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'codigo'); ?>
-		<?php echo $form->textField($model,'codigo',array('size'=>12,'maxlength'=>12)); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'codigo',array('class'=>'span5','maxlength'=>12)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'descripcion'); ?>
-		<?php echo $form->textArea($model,'descripcion',array('rows'=>6, 'cols'=>50)); ?>
-	</div>
+		<?php echo $form->textAreaRow($model,'descripcion',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'fecha_inicio'); ?>
-		<?php echo $form->textField($model,'fecha_inicio'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'fecha_inicio',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'fecha_fin'); ?>
-		<?php echo $form->textField($model,'fecha_fin'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'fecha_fin',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'estatus'); ?>
-		<?php echo $form->textField($model,'estatus',array('size'=>15,'maxlength'=>15)); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'estatus',array('class'=>'span5','maxlength'=>15)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'fecha_registro'); ?>
-		<?php echo $form->textField($model,'fecha_registro'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'fecha_registro',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'registrado_por'); ?>
-		<?php echo $form->textField($model,'registrado_por'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'registrado_por',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'modificado_por'); ?>
-		<?php echo $form->textField($model,'modificado_por'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'modificado_por',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'fecha_modificado'); ?>
-		<?php echo $form->textField($model,'fecha_modificado'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'fecha_modificado',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'eliminado'); ?>
-		<?php echo $form->textField($model,'eliminado'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'eliminado',array('class'=>'span5')); ?>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+	<div class="form-actions">
+		<?php $this->widget('bootstrap.widgets.TbButton', array(
+			'buttonType' => 'submit',
+			'type'=>'primary',
+			'label'=>'Search',
+		)); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
-
-</div><!-- search-form -->
