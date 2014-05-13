@@ -45,7 +45,7 @@ class Imagen extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('nombre, registrado_por, fecha_registro, modificado_por, fecha_modificado', 'required'),
+            array('nombre', 'required'),
             array('publico, registrado_por, modificado_por, eliminado', 'numerical', 'integerOnly' => true),
             array('nombre', 'length', 'max' => 500),
             array('nombre_corto', 'length', 'max' => 25),
@@ -146,6 +146,30 @@ class Imagen extends CActiveRecord {
         $criteria->compare('estatus', 'ACTIVO');
         $criteria->compare('eliminado', 0);         
         return $this->findAll($criteria);
+    }
+    
+    /**
+     * 
+     * @param type $persona
+     * @return \CDbCriteria
+     */
+    public function obtenerListaImagenesPorIdPersona($persona) {
+        $criteria = new CDbCriteria();
+        $criteria->alias = "cata_imagen";
+        $criteria->select = "cata_imagen.*";
+        $criteria->compare('data_imagen_persona.estatus', 'ACTIVO');
+        $criteria->compare('data_imagen_persona.id_persona', $persona);
+        $criteria->compare('data_imagen_persona.eliminado', 0);
+        
+        $criteria->join = "inner join data_imagen_persona on data_imagen_persona.id_imagen = cata_imagen.id";
+//        return $this->findAll($criteria);
+        return $criteria;
+    }
+    
+    public function obtenerListaImagenesPorIdPersonaDP($persona) {
+        return new CActiveDataProvider($this, array(
+            'criteria' => $this->obtenerListaImagenesPorIdPersona($persona),
+        ));
     }
 
     public function obtenerListaImagenesPublicas() {

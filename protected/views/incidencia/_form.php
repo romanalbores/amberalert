@@ -21,6 +21,7 @@
 $formIncidencia = $this->renderPartial('_formIncidencia', array('model' => $model, 'modelIncidenciaTiempo' => $modelIncidenciaTiempo), true, false);
 $formIncidenciaTiempo = $this->renderPartial('_formIncidenciaTiempo', array('model' => $modelIncidenciaTiempo), true, false);
 $formPersonaMenor = $this->renderPartial('_formPersona', array('model' => $modelPersonaMenor, 'modelPersonaMenorCaracteristica'=>$modelPersonaMenorCaracteristica,'modelPersonaMenorVestimenta'=>$modelPersonaMenorVestimenta), true, false);
+$formPersonaMenorImagenes = $this->renderPartial('_formSubirImagenes', array('model' => $modelPersonaMenor,'tipo'=>'IMAGEN_PERSONA_MENOR'), true, false);
 $formPersonaMenorCaracteristica = $this->renderPartial('_formPersonaSospechoso', array('model' => $modelPersonaSospechoso, 'modelPersonaMenorCaracteristica'=>$modelPersonaSospechosoCaracteristica,'modelPersonaMenorVestimenta'=>$modelPersonaSospechosoVestimenta), true, false);
 $formVehiculoSospechoso = $this->renderPartial('_formPersonaCaracteristicaVehiculoSospechoso', array('model' => new PersonaCaracteristicaVehiculo()), true, false);
 
@@ -59,14 +60,15 @@ $this->widget(
             return res;
         }'
     ),
-    'tabs' => array(
+    'tabs' => array(       
         array(
             'label' => 'Incidencia',
             'content' => $formIncidencia,
             'active' => true
         ),
         array('label' => 'Tiempos', 'content' => $formIncidenciaTiempo),
-        array('label' => 'El menor', 'content' => $formPersonaMenor),
+        array('label' => 'El menor', 'content' => $formPersonaMenor),        
+        array('label' => 'Imagenes','content' => $formPersonaMenorImagenes),
         array('label' => 'Sospechoso', 'content' => $formPersonaMenorCaracteristica),
         array('label' => 'Vehiculo sospechoso', 'content' => $formVehiculoSospechoso),
     ),

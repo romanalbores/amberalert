@@ -20,7 +20,7 @@ function mySubmitFormFunction(form, data, hasError){
             //$('#wizard-incidencias').bootstrapWizard('show', 1);            
             // $( "#wizard-incidencias li:eq(" + next_step + ") a" ).trigger("click");
             // $("html, body").animate({ scrollTop: 0 }, "slow");            
-            console.log(res);
+//            console.log(res);
             if (res.result){
                 console.log(res.data);
                 window.location = res.data;
@@ -41,7 +41,8 @@ function validaPaso(tab, navigation, index, direction){
     next_step = index;  
     current_tab = current_step + 1;
     console.log("CURRENT STEP: " + current_step + " CURRENT INDEX: " + index + " CURRENT TAB: " + current_tab);
-    var form_to_validate = $('#wizard-incidencias_tab_' + current_tab + ' form');
+    var form_to_validate = $('#wizard-incidencias_tab_' + current_tab + ' form.validarForm');
+    
     
     form_to_validate.submit();
     return false;
