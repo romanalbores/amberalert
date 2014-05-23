@@ -2,7 +2,8 @@
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id' => 'persona-caracteristica-vehiculo-form',
     'enableAjaxValidation' => false,
-        ));
+    'htmlOptions'=>array('class'=>'validarForm')
+        ));    
 ?>
 
 <p class="help-block">Fields with <span class="required">*</span> are required.</p>

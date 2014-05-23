@@ -29,7 +29,7 @@ class IncidenciaController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update'),
+                'actions' => array('create', 'update','SubirImagenPersona'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -42,6 +42,106 @@ class IncidenciaController extends Controller {
         );
     }
 
+    public function actionSubirImagenPersona($id_persona) {
+        $modelPersona = Persona::model()->findByPk($id_persona);
+        if ($modelPersona === null)
+            throw new CHttpException(404, 'The requested page does not exist.');
+        
+        // If an error causes output to be generated before headers are sent - catch it.
+        ob_start();
+
+        // Upload data can be POST'ed as raw form data or uploaded via <iframe> and <form>
+        // using regular multipart/form-data enctype (which is handled by PHP $_FILES).
+        if (!empty($_FILES['fd-file']) and is_uploaded_file($_FILES['fd-file']['tmp_name'])) {
+            // Regular multipart/form-data upload.
+            $name = $_FILES['fd-file']['name'];
+            $data = file_get_contents($_FILES['fd-file']['tmp_name']);
+            $x = 0;
+            $y = 0;
+            $w = 0;
+            $h = 0;
+//            $res = $this->SubirArchivos('fd-file', '/../uploads/aprende_rollouts_images/', true);
+            $res = $this->SubirImagen('fd-file', '/../uploads/personas_images/',false,true);
+            
+        } else {
+            // Raw POST data.
+            $name = $_SERVER['HTTP_X_FILE_NAME'];
+            $data = file_get_contents("php://input");
+//            $res = $this->SubirArchivos($name, '/../uploads/aprende_rollouts_images/', false);
+            $res = $this->SubirImagen('fd-file', '/../uploads/personas_images/',false,false);
+        }
+        if($res != null){
+            $modelCataImagen = new Imagen();
+            $modelCataImagen->nombre = $res['nombre'];
+            $modelCataImagen->extension = $res['tipo'];
+            $modelCataImagen->ruta = "/uploads/personas_images/";
+            $modelCataImagen->save();
+            $modelDataImagenPersona = new DataImagenPersona();
+            $modelDataImagenPersona->id_imagen = $modelCataImagen->id;
+            $modelDataImagenPersona->id_persona = $modelPersona->id;
+            $modelDataImagenPersona->save();            
+        }
+        echo CJSON::encode($res);
+        Yii::app()->end();
+    }
+    
+    /**
+     * Funcion para subir imagenes
+     * @param string $NameField
+     * @return string
+     */
+    private function SubirImagen($NameField, $path = '/../uploads/', $crop = false, $file = true) {
+        $res = array('nombre' => '', 'tipo' => '');
+        //new Upload($_FILES[$NameField]);
+        $handle = $file ? Yii::createComponent('application.extensions.subir_archivo.Upload', $_FILES[$NameField]) :
+                Yii::createComponent('application.extensions.subir_archivo.Upload', 'php:' . $NameField);
+        // then we check if the file has been uploaded properly
+        if ($handle->uploaded) {
+            // yes, the file is on the server
+            // below are some example settings which can be used if the uploaded file is an image.
+//            $handle->image_resize = true;
+            $nombre_nuevo = uniqid();
+            $handle->file_new_name_body = $nombre_nuevo;
+            $handle->image_ratio_y = true;
+            $handle->image_x = $handle->image_src_x;
+
+            // now, we start the upload 'process'. That is, to copy the uploaded file
+            // from its temporary location to the wanted location
+            // It could be something like $handle->Process('/home/www/my_uploads/');
+            $handle->Process(Yii::app()->basePath . $path);
+            // we check if everything went OK
+            if ($handle->processed) {
+                if ($crop) {
+                    //$res = $this->crearImagen($x, $y, $w, $h, $x3, $y3, $handle->file_dst_name, $nombre_nuevo, $handle, $path);
+                    $res['nombre'] = $nombre_nuevo;
+                    if($handle->file_src_name_ext!=""){
+                        $res['tipo'] = $handle->file_src_name_ext;
+                    }
+                    elseif ($handle->file_src_mime == "image/jpeg") {
+                        $res['tipo'] = "jpg";
+                    }                    
+                } else {
+                    $res['nombre'] = $nombre_nuevo;
+                    if($handle->file_src_name_ext!=""){
+                        $res['tipo'] = $handle->file_src_name_ext;
+                    }
+                    elseif ($handle->file_src_mime == "image/jpeg") {
+                        $res['tipo'] = "jpg";
+                    } 
+                }
+//                $res['nombre'] = $nombre_nuevo;
+//                $res['tipo'] = $handle->file_src_name_ext;
+                return $res;
+            } else {
+                return null;
+            }
+            // we delete the temporary files
+            $handle->Clean();
+        } else {
+            return null;
+        }
+    }
+    
     /**
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
@@ -108,6 +208,11 @@ class IncidenciaController extends Controller {
             $modelPersonaSospechosoVestimenta->id_persona_caracteristica = $modelPersonaSospechosoCaracteristica->id;                                
         }
         
+        /**
+         * Llenando datos de modelo persona
+         */
+        $persona = Persona::model()->findByPk(1);
+        
         $returnStep = isset($_GET['next_step']) ? $_GET['next_step'] : -1;
 
 // Uncomment the following line if AJAX validation is needed
@@ -117,6 +222,8 @@ class IncidenciaController extends Controller {
                 $modelPersonaMenor, 
                 $modelPersonaMenorCaracteristica, 
                 $modelPersonaMenorVestimenta);
+        
+        $this->performAjaxValidationImagen($persona);
 
         // Insercion y actualizacion de incidencia tiempo
         $this->fn_performAjaxValidationIncidenciatiempo($modelIncidenciaTiempo);
@@ -128,6 +235,10 @@ class IncidenciaController extends Controller {
         if (isset($_POST['Persona']['tipo_persona']) && $_POST['Persona']['tipo_persona'] =="SOSPECHOSO") {
             // Insercion y actualizacino de persona sospechosa
             $this->fn_performAjaxValidationPersonaSospechoso($model->id, $modelPersonaMenor->id, $modelPersonaSospechoso,$modelPersonaSospechosoCaracteristica,$modelPersonaSospechosoVestimenta);
+        }        
+        if (isset($_POST['Persona']['tipo_imagen']) && $_POST['Persona']['tipo_imagen'] =="IMAGEN_PERSONA_MENOR") {
+            // Insercion y actualizacino de persona sospechosa
+            $this->fn_performAjaxValidationImagen($model->id,$_POST['Persona']['id']);
         }
 
         if (isset($_POST['Incidencia'])) {
@@ -158,6 +269,16 @@ class IncidenciaController extends Controller {
         ));
     }
 
+    private function fn_performAjaxValidationImagen($id_incidencia) {                
+        $saved = true;
+        if($saved){
+            $returnStep = isset($_POST['next_step']) ? $_POST['next_step'] : -1;
+            $returnUrl = Yii::app()->createUrl('Incidencia/Create',array('id'=>$id_incidencia,'next_step'=>$returnStep));
+            echo CJSON::encode(array('result'=>true,'data'=>$returnUrl));
+            Yii::app()->end();
+        }        
+    }
+    
     private function fn_performAjaxValidationIncidenciatiempo($modelIncidenciaTiempo) {                
         if (isset($_POST['IncidenciaTiempo'])) {
             $modelIncidenciaTiempo->attributes = $_POST['IncidenciaTiempo'];      
@@ -358,7 +479,7 @@ class IncidenciaController extends Controller {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'incidencia-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
-        }        
+        }
     }
     /**
      * Performs the AJAX validation.
@@ -366,6 +487,16 @@ class IncidenciaController extends Controller {
      */
     protected function performAjaxValidationIncidenciaTiempo($model) {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'incidencia-tiempo-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }        
+    }
+    /**
+     * Performs the AJAX validation.
+     * @param CModel the model to be validated
+     */
+    protected function performAjaxValidationImagen($model) {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'imagenes-formIMAGEN_PERSONA_MENOR') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }        

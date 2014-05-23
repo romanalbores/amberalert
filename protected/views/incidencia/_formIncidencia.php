@@ -11,6 +11,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         'validateOnSubmit' => true, // Required to perform AJAX validation on form submit
         'afterValidate' => 'js:mySubmitFormFunction', // Your JS function to submit form
     ),
+        'htmlOptions'=>array('class'=>'validarForm')
         ));
 ?>
 <p class="help-block">Campos con <span class="required">*</span> son requeridos.</p>
