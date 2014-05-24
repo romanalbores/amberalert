@@ -10,7 +10,7 @@ return array(
     'language' => 'es',
     'sourceLanguage' => 'en',
     'charset' => 'utf-8',
-    'theme' => 'bootstrap',
+    'theme' => 'amber',
     'preload' => array('log', 'bootstrap'),
     'timeZone' => 'America/Mexico_City',
     // preloading 'log' component

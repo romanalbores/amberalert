@@ -122,6 +122,32 @@ class ConfiguracionDia extends CActiveRecord {
             'criteria' => $criteria,
         ));
     }
+    
+    
+        public function searchAux() {
+        // Warning: Please modify the following code to remove attributes that
+        // should not be searched.
+
+        $criteria = new CDbCriteria;
+
+        $criteria->compare('id', $this->id);
+        $criteria->compare('nombre', $this->nombre, true);
+        $criteria->compare('nombre_corto', $this->nombre_corto, true);
+        $criteria->compare('codigo', $this->codigo, true);
+        $criteria->compare('descripcion', $this->descripcion, true);
+        $criteria->compare('fecha_inicio', $this->fecha_inicio, true);
+        $criteria->compare('fecha_fin', $this->fecha_fin, true);
+        $criteria->compare('estatus', $this->estatus, true);
+        $criteria->compare('fecha_registro', $this->fecha_registro, true);
+        $criteria->compare('registrado_por', $this->registrado_por);
+        $criteria->compare('modificado_por', $this->modificado_por);
+        $criteria->compare('fecha_modificado', $this->fecha_modificado, true);
+        $criteria->compare('eliminado', $this->eliminado);
+
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+        ));
+    }
 
     public function behaviors() {
         return array(
