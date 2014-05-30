@@ -14,6 +14,8 @@
  */
 class ConfiguracionDH extends CActiveRecord {
 
+    public $dia;
+
     /**
      * Returns the static model of the specified AR class.
      * @param string $className active record class name.
@@ -42,7 +44,7 @@ class ConfiguracionDH extends CActiveRecord {
             array('estatus', 'length', 'max' => 15),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, configuracion_id, id_dia, hora_fin, hora_inicio, estatus, eliminado', 'safe', 'on' => 'search'),
+            array('id, configuracion_id, id_dia, hora_fin, hora_inicio, estatus', 'safe', 'on' => 'search'),
         );
     }
 
@@ -53,6 +55,7 @@ class ConfiguracionDH extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
+            'idDia' => array(self::BELONGS_TO, 'Dia', 'id_dia'),
         );
     }
 
@@ -63,7 +66,7 @@ class ConfiguracionDH extends CActiveRecord {
         return array(
             'id' => 'ID',
             'configuracion_id' => 'Configuracion',
-            'id_dia' => 'Id Dia',
+            'id_dia' => 'Dia',
             'hora_fin' => 'Hora Fin',
             'hora_inicio' => 'Hora Inicio',
             'estatus' => 'Estatus',
@@ -91,23 +94,8 @@ class ConfiguracionDH extends CActiveRecord {
             'criteria' => $criteria,
         ));
     }
-/*
-    public function behaviors() {
-        return array(
-            'CTimestampBehavior' => array(
-                'class' => 'zii.behaviors.CTimestampBehavior',
-                'createAttribute' => 'registrado_por',
-                'updateAttribute' => 'modificado_por',
-                'setUpdateOnCreate' => true,
-            ),
-            'BlameableBehavior' => array(
-                'class' => 'application.components.behaviors.BlameableBehavior',
-                'createdByColumn' => 'fecha_registro',
-                'updatedByColumn' => 'fecha_modificado',
-            ),
-        );
-    }
-*/
+
+   
     public function getByCode($code) {
         $criteria = new CDbCriteria;
         $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND codigo=" . $code . " AND id=" . $id;
@@ -119,7 +107,7 @@ class ConfiguracionDH extends CActiveRecord {
         $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id=" . $id;
         return $this->findAll($criteria);
     }
-    
+
     public function getByIdConfiguracion($id_configuracion) {
         $criteria = new CDbCriteria;
         $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_configuracion=" . $id_configuracion;

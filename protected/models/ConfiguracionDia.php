@@ -33,7 +33,12 @@ class ConfiguracionDia extends CActiveRecord {
     }
 
     public $dia;
-    public $dia_hora;
+    public $id_dia;
+    public $codigo_dia;
+    public $id_configuracion_dia_hora;
+    public $hora_inicio;
+    public $hora_fin;
+    public $estatus_dia_hora;
 
     /**
      * @return string the associated database table name
@@ -59,6 +64,7 @@ class ConfiguracionDia extends CActiveRecord {
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, dia, dia_hora,  nombre, nombre_corto, codigo, descripcion, fecha_inicio, fecha_fin, estatus, fecha_registro, registrado_por, modificado_por, fecha_modificado, eliminado', 'safe', 'on' => 'search'),
+            array('id, dia, dia_hora,  codigo_dia , hora_inicio, hora_fin, nombre, nombre_corto, codigo, descripcion, fecha_inicio, fecha_fin, estatus, fecha_registro, registrado_por, modificado_por, fecha_modificado, eliminado', 'safe', 'on' => 'searchAux'),
         );
     }
 
@@ -70,6 +76,8 @@ class ConfiguracionDia extends CActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'configuracionPostes' => array(self::HAS_MANY, 'ConfiguracionPoste', 'id_configuracion'),
+            'idDia' => array(self::BELONGS_TO, 'Dia', 'id_dia'),
+            'idConfiguracionDiaHora' => array(self::BELONGS_TO, 'ConfiguracionDH', 'id'),
         );
     }
 
@@ -101,9 +109,7 @@ class ConfiguracionDia extends CActiveRecord {
     public function search() {
         // Warning: Please modify the following code to remove attributes that
         // should not be searched.
-
         $criteria = new CDbCriteria;
-
         $criteria->compare('id', $this->id);
         $criteria->compare('nombre', $this->nombre, true);
         $criteria->compare('nombre_corto', $this->nombre_corto, true);
@@ -117,33 +123,48 @@ class ConfiguracionDia extends CActiveRecord {
         $criteria->compare('modificado_por', $this->modificado_por);
         $criteria->compare('fecha_modificado', $this->fecha_modificado, true);
         $criteria->compare('eliminado', $this->eliminado);
-
+        
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
     }
-    
-    
-        public function searchAux() {
-        // Warning: Please modify the following code to remove attributes that
-        // should not be searched.
 
+    public function searchAux() {
         $criteria = new CDbCriteria;
+        $criteria->alias = "confD";
+        $criteria->select = "confD.id, d.id as id_dia, d.nombre as dia, d.codigo as codigo_dia, dh.id as id_configuracion_dia_hora, dh.hora_inicio as hora_inicio, dh.hora_fin as hora_fin, confD.nombre, confD.nombre_corto, confD.codigo, confD.descripcion, confD.estatus, confD.registrado_por, confD.fecha_registro, confD.modificado_por, confD.fecha_modificado, confD.eliminado";
+        $criteria->join = "LEFT OUTER JOIN alrt_configuracion_dia_hora dh ON dh.configuracion_id=confD.id LEFT OUTER JOIN cata_dia d ON dh.id_dia = d.id";
+        $criteria->addSearchCondition('d.id', $this->id_dia, false, 'OR');
+        $criteria->addSearchCondition('d.nombre', $this->dia, false, 'OR');
+        $criteria->addSearchCondition('dh.id', $this->id_configuracion_dia_hora, false, 'OR');      
+        $criteria->addSearchCondition('dh.hora_inicio', $this->hora_inicio, false, 'OR');
+        $criteria->addSearchCondition('dh.hora_fin', $this->hora_fin, false, 'OR'); 
+        $criteria->compare('confD.nombre', $this->nombre, false, 'OR');
+        $criteria->compare('confD.nombre_corto', $this->nombre_corto, false, 'OR');
+        $criteria->compare('confD.codigo', $this->codigo, false, 'OR');
+        $criteria->compare('confD.estatus', 'ACTIVO');
+        $criteria->compare('confD.eliminado', 0);
+        $criteria->group = 'd.id';
+        $criteria->order = "confD.id desc";
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+        ));
+    }
 
-        $criteria->compare('id', $this->id);
-        $criteria->compare('nombre', $this->nombre, true);
-        $criteria->compare('nombre_corto', $this->nombre_corto, true);
-        $criteria->compare('codigo', $this->codigo, true);
-        $criteria->compare('descripcion', $this->descripcion, true);
-        $criteria->compare('fecha_inicio', $this->fecha_inicio, true);
-        $criteria->compare('fecha_fin', $this->fecha_fin, true);
-        $criteria->compare('estatus', $this->estatus, true);
-        $criteria->compare('fecha_registro', $this->fecha_registro, true);
-        $criteria->compare('registrado_por', $this->registrado_por);
-        $criteria->compare('modificado_por', $this->modificado_por);
-        $criteria->compare('fecha_modificado', $this->fecha_modificado, true);
-        $criteria->compare('eliminado', $this->eliminado);
-
+    public function searchAuxTemp() {
+        $criteria = new CDbCriteria;
+        $criteria->alias = "ofi";
+        $criteria->select = "ofi.id, ofi.id_organizacion, org.nombre as organizacion, ofi.id_region, reg.nombre as region , ofi.nombre, ofi.nombre_corto, ofi.codigo, ofi.descripcion, ofi.estatus, ofi.registrado_por, ofi.fecha_registro, ofi.modificado_por, ofi.fecha_modificado, ofi.eliminado";
+        $criteria->join = "LEFT OUTER JOIN cata_organizacion org ON ofi.id_organizacion=org.id LEFT OUTER JOIN cata_region reg ON ofi.id_region=reg.id ";
+        $criteria->addSearchCondition('org.nombre', $this->organizacion_nombre, false, 'OR');
+        $criteria->addSearchCondition('reg.nombre', $this->region_nombre, false, 'OR');
+        $criteria->compare('ofi.nombre', $this->nombre, false, 'OR');
+        $criteria->compare('ofi.nombre_corto', $this->nombre_corto, false, 'OR');
+        $criteria->compare('ofi.codigo', $this->codigo, false, 'OR');
+        $criteria->compare('ofi.estatus', 'ACTIVO');
+        $criteria->compare('ofi.eliminado', 0);
+        $criteria->group = 'ofi.id';
+        $criteria->order = "ofi.id desc";
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));

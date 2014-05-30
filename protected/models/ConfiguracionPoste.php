@@ -78,9 +78,9 @@ class ConfiguracionPoste extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'id_incidencia' => 'Id Incidencia',
-			'id_configuracion' => 'Id Configuracion',
-			'id_poste_direccion' => 'Id Poste Direccion',
+			'id_incidencia' => 'Incidencia',
+			'id_configuracion' => 'Configuracion',
+			'id_poste_direccion' => 'Direccion Poste ',
 			'estatus' => 'Estatus',
 			'registrado_por' => 'Registrado Por',
 			'fecha_registro' => 'Fecha Registro',

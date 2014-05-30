@@ -35,7 +35,10 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         'nombre',
         'nombre_corto',
         'codigo',
-        'descripcion',
+        array('name' => 'dia', 'value' => '$data->idDia->nombre'),
+        array('name' => 'hora_inicio', 'value' => '$data->idConfiguracionDiaHora->hora_inicio'),
+        array('name' => 'hora_fin', 'value' => '$data->idConfiguracionDiaHora->hora_fin'),
+        //'descripcion',
         'estatus',
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
