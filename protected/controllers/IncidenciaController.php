@@ -240,6 +240,10 @@ class IncidenciaController extends Controller {
             // Insercion y actualizacino de persona sospechosa
             $this->fn_performAjaxValidationImagen($model->id,$_POST['Persona']['id']);
         }
+        if (isset($_POST['Persona']['tipo_imagen']) && $_POST['Persona']['tipo_imagen'] =="IMAGEN_PERSONA_SOSPECHOSO") {
+            // Insercion y actualizacino de persona sospechosa
+            $this->fn_performAjaxValidationImagen($model->id,$_POST['Persona']['id']);
+        }
 
         if (isset($_POST['Incidencia'])) {
             $model->attributes = $_POST['Incidencia'];
@@ -496,7 +500,7 @@ class IncidenciaController extends Controller {
      * @param CModel the model to be validated
      */
     protected function performAjaxValidationImagen($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'imagenes-formIMAGEN_PERSONA_MENOR') {
+        if (isset($_POST['ajax']) && ($_POST['ajax'] === 'imagenes-formIMAGEN_PERSONA_MENOR' || $_POST['ajax'] === 'imagenes-formIMAGEN_PERSONA_SOSPECHOSO')) {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }        

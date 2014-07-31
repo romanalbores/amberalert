@@ -101,7 +101,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
   </p>
 </fieldset>-->
 
-<fieldset id="zbasic">
+<fieldset id="zbasic<?php echo $model->id; ?>">
   <legend>Arrastra un archivo aqui…</legend>
   <p>O da click aqu&iacute; para <em>Buscar…</em></p>
 
@@ -113,7 +113,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 <?php 
 $modelImagenes = new Imagen();
 $this->widget('bootstrap.widgets.TbListView',array(
-'id'=>'list_imagenes',
+'id'=>'list_imagenes'.$model->id,
 'dataProvider'=>$modelImagenes->obtenerListaImagenesPorIdPersonaDP($model->id),
 'itemView'=>'_formSubirImagenes_view',
 )); ?>
@@ -121,7 +121,7 @@ $this->widget('bootstrap.widgets.TbListView',array(
 
 <script>
     var options = {iframe: {url: '<?php echo Yii::app()->createUrl('Incidencia/SubirImagenPersona') ?>' + '?ajax=1'}, multiple: true};
-    var zone = new FileDrop('zbasic', options);
+    var zone = new FileDrop('zbasic<?php echo $model->id; ?>', options);
 
     zone.event('send', function(files) {
         files.each(function(file) {
@@ -130,7 +130,7 @@ $this->widget('bootstrap.widgets.TbListView',array(
                 // Here, 'this' points to fd.File instance.                
                 var data = JSON.parse(xhr.responseText);
                 console.log(data);
-				$.fn.yiiListView.update("list_imagenes");
+				$.fn.yiiListView.update("list_imagenes<?php echo $model->id; ?>");
             })
 
             file.event('progress', function(current, total) {
