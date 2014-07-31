@@ -10,20 +10,34 @@ Yii::app()->clientScript->registerScriptFile(
 
 <?php
 
+//$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+////    'id' => 'imagenes-form'.$tipo,        
+//    'id' => 'persona-menor-form-dos',        
+////    'enableClientValidation' => true,
+//    'enableAjaxValidation' => true,
+//    'clientOptions' => array(
+//        'validateOnSubmit' => true, // Required to perform AJAX validation on form submit
+//        'afterValidate' => 'js:mySubmitFormFunction', // Your JS function to submit form
+//    ),
+//    'htmlOptions'=>array('class'=>'validarForm')
+//        ));
+
+?>
+<?php
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
-    'id' => 'imagenes-form'.$tipo,        
-//    'enableClientValidation' => true,
+    'id' => 'imagenes-form'.$tipo,
     'enableAjaxValidation' => true,
     'clientOptions' => array(
         'validateOnSubmit' => true, // Required to perform AJAX validation on form submit
         'afterValidate' => 'js:mySubmitFormFunction', // Your JS function to submit form
     ),
-    'htmlOptions'=>array('class'=>'validarForm')
+        'htmlOptions'=>array('class'=>'validarForm')
         ));
-
 ?>
-<input type="hidden" value="<?php echo $tipo ?>" name="Persona[tipo_imagen]">
+<?php echo $form->textFieldRow($model, 'nombre', array('class' => 'span5 invisible', 'maxlength' => 200,)); ?>
+
 <?php echo $form->hiddenField($model, 'id', array('class' => 'span5', 'maxlength' => 1000)); ?>
+<input type="hidden" value="<?php echo $tipo ?>" name="Persona[tipo_imagen]">
 <?php $this->endWidget(); ?>
 <style>
     /***
@@ -39,6 +53,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
   width: 15em;
   margin: 0 auto;
   text-align: center;
+}
+.fd-zone legend{
+    border: thin dashed;
 }
 
 /* Hides <input type="file"> while simulating "Browse" button: */
