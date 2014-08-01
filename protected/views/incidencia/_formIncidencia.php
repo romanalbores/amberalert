@@ -38,7 +38,7 @@ echo $form->dropDownListRow(
 <?php
 echo $form->datepickerRow(
         $model, 'fecha_incidencia', array(
-    'options' => array('language' => 'es', 'format' => 'dd/mm/yyyy'),
+    'options' => array('language' => 'es', 'format' => 'yyyy-mm-dd'),
     'prepend' => '<i class="icon-search"></i>',
         )
 );

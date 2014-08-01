@@ -26,7 +26,14 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 <?php echo $form->textFieldRow($model, 'genero', array('class' => 'span5', 'maxlength' => 15)); ?>
 
-<?php echo $form->textFieldRow($model, 'fecha_nacimiento', array('class' => 'span5')); ?>
+<?php     
+    echo $form->datepickerRow(
+        $model, 'fecha_nacimiento', array(
+    'options' => array('language' => 'es', 'format' => 'yyyy-mm-dd'),
+    'prepend' => '<i class="icon-search"></i>',
+        )
+);
+?>
 
 
 
