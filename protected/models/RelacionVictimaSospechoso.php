@@ -27,6 +27,8 @@
  */
 class RelacionVictimaSospechoso extends CActiveRecord {
 
+    
+    
     /**
      * Returns the static model of the specified AR class.
      * @param string $className active record class name.
@@ -149,7 +151,8 @@ class RelacionVictimaSospechoso extends CActiveRecord {
         $criteria = new CDbCriteria();
         $criteria->compare('estatus', 'ACTIVO');
         $criteria->compare('eliminado', 0);
-        return $this->findAll($criteria);
+        //return $this->findAll($criteria);
+        return $criteria;
     }
 
     public function getById($id) {
@@ -174,6 +177,35 @@ class RelacionVictimaSospechoso extends CActiveRecord {
         $criteria = new CDbCriteria;
         $criteria->condition = "estatus='ACTIVO' AND eliminado=0 AND id_tipo_relacion=" . $id_tipo_relacion;
         return $criteria;
+    }
+     
+    /**
+    * Validar si existe una imagen de perfil apartir de su id
+    */
+    public function existeImagen($id_usuario){
+        $query = "  select data_persona.id, data_imagen_persona.id_imagen, cata_imagen.nombre, cata_imagen.ruta, cata_imagen.extension
+                    from data_persona, data_imagen_persona, cata_imagen
+                    where data_persona.id = $id_usuario and data_persona.id = data_imagen_persona.id_persona and  data_imagen_persona.id_imagen = cata_imagen.id;";
+        $imagen = Yii::app()->db->createCommand($query)->queryAll();
+        return $imagen;
+    }
+    
+    public function verImagen($id_usuario)
+    {
+        //Validadndo si la existe una iamgen guardada en la base de datos
+        $existe_avatar = RelacionVictimaSospechoso::model()->existeImagen($id_usuario);
+        $avatar = ($existe_avatar)? $existe_avatar[0]['nombre'] : "";
+
+        if($avatar){
+            //validar si existe en la ruta especificada
+            $ruta = Yii::app()->basePath."/..".$existe_avatar[0]['ruta'].$existe_avatar[0]['nombre'].".".$existe_avatar[0]['extension'];
+            #$imagen_perfil = Yii::app()->basePath."/../uploads/avatar/".$model_usuario['avatar'];        
+            if(file_exists($ruta))
+                echo "<img src='".$ruta."' alt='Sospechoso' height='150' width='120'>";
+            else
+                echo "<img src='".Yii::app()->baseUrl."/uploads/personas_images/perdido.jpg' alt='Sospechoso' height='250' width='200'>";
+        }else
+            echo "<img src='".Yii::app()->baseUrl."/uploads/personas_images/perdido.jpg' alt='Sospechoso' height='250' width='200'>";
     }
 
 }

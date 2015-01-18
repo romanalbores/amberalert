@@ -130,4 +130,17 @@ class Configuracion extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public function obtenerDetalleVisualizacion($id)
+    {
+        $query = "  select c.nombre, d.nombre as dia_particular, cdh.hora_inicio, cdh.hora_fin, cdh.estatus from alrt_configuracion c
+                    inner join alrt_configuracion_dia_hora cdh
+                    on c.id = cdh.configuracion_id 
+                    inner join cata_dia d
+                    on cdh.id_dia = d.id 
+                    where c.estatus = 'ACTIVO'
+                    and c.id = ".$id;
+        $retorno = Yii::app()->db->createCommand($query)->queryAll();
+        return $retorno;
+    }
 }

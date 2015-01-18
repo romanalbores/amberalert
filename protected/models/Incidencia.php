@@ -169,4 +169,11 @@ class Incidencia extends CActiveRecord {
             ),
         );
     }
+    public function getById($id){
+        $criteria = new CDbCriteria;
+        $criteria->compare('id', $id);
+        $criteria->compare('estatus', "ACTIVO");
+        $criteria->compare('eliminado', 0);
+        return $criteria;
+    }
 }
