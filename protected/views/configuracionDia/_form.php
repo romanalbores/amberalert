@@ -19,22 +19,21 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 <?php
 echo $form->datepickerRow(
-        $model, 'fecha_inicio', array(
-    'options' => array('language' => 'es', 'format' => 'yyyy-mm-dd'),
+     $model, 'fecha_inicio', array(
+    'options' => array('language' => 'es', 
+    'format' => 'yyyy-mm-dd'),
     'prepend' => '<i class="icon-search"></i>',
         )
 );
 ?>
 <?php
 echo $form->datepickerRow(
-        $model, 'fecha_fin', array(
+    $model, 'fecha_fin', array(
     'options' => array('language' => 'es', 'format' => 'yyyy-mm-dd'),
     'prepend' => '<i class="icon-search"></i>',
         )
 );
-?>+
-
-<?php //echo $form->label($modelDH, "Días"); ?>
+?>
 
 <?php
     echo $form->checkBoxList($modelDH, 'id_dia', CHtml::listData(Dia::model()->findAll(), 'id', 'nombre'));
@@ -44,13 +43,15 @@ echo $form->datepickerRow(
 echo $form->timepickerRow(
         $modelDH, 'hora_inicio', array(
         'options' => array('language' => 'es',
-        'timeFormat' => 'HH:MM:SS',
         'showOn' => 'button',
         'showSecond' => false,
         'changeMonth' => false,
         'changeYear' => false,
         'tabularLevel' => null,
-    ),
+            'timeFormat'=>'HH:MM',
+            'showButtonPanel'=>true,
+            'alwaysSetTime'=>false,    
+     ),
     'prepend' => '<i class="icon-search"></i>',
         )
 );
@@ -58,7 +59,16 @@ echo $form->timepickerRow(
 <?php
 echo $form->timepickerRow(
         $modelDH, 'hora_fin', array(
-    'options' => array('language' => 'es', 'format' => 'yyyy-mm-dd'),
+        'options' => array('language' => 'es',
+        'showOn' => 'button',
+        'showSecond' => false,
+        'changeMonth' => false,
+        'changeYear' => false,
+        'tabularLevel' => null,
+           'timeFormat'=>'hh:mm',
+            'showButtonPanel'=>true,
+            'alwaysSetTime'=>false,
+    ),
     'prepend' => '<i class="icon-search"></i>',
         )
 );
