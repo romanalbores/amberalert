@@ -1,0 +1,56 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 8/07/2014, 11:21:32 PM
+    Author     : Aldrin
+*/
+
+#container-ubicacion, #container-ubicacion, #container-finalizar{
+    max-width: 830px !important;
+}
+
+#container-ubicacion, #container-finalizar{
+    display: none;
+}
+
+#finalizar-datos-victima, #finalizar-foto{
+    display: inline-block;
+    vertical-align: top;
+}
+
+#finalizar-foto{
+    margin-left: 40px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+#finalizar-foto h3{
+    color: #b94a48;
+}
+
+#visualizacion-label-error, #ubicacion-label-error{
+    display: none;
+}
+
+.rel_vict_conf:hover, .rel_vict_sospechoso_sospechoso:hover{
+    color: #3a87ad;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.rel_vict_sospechoso_sospechoso{
+    color: #3a87ad;
+}
+
+.table-config{
+    max-width: 800px !important;
+}
+
+.table-finalizar{
+    max-width: 600px !important;
+    min-width: 400px ;
+}
+

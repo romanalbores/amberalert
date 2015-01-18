@@ -41,7 +41,7 @@ class TipoVehiculo extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('nombre, registrado_por, fecha_registro, modificado_por, fecha_modificado', 'required'),
+            array('nombre, fecha_registro, fecha_modificado', 'required'),
             array('registrado_por, modificado_por, eliminado', 'numerical', 'integerOnly' => true),
             array('nombre', 'length', 'max' => 500),
             array('nombre_corto', 'length', 'max' => 25),
